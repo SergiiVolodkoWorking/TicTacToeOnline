@@ -5,16 +5,6 @@ import GameMenu from './components/GameMenu'
 import Board from './components/Board'
 import Footer from './components/Footer'
 
-
-// const Footer = class Footer extends React.Component {
-//     componentDidMount() {alert("ok")}
-
-//     render() {
-//         return(
-//         <div>Version:</div>)
-//       }
-// }
-
 const Main = () => 
     <div>
         <header>
