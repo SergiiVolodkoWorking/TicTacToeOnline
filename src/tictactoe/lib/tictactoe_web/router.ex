@@ -13,14 +13,15 @@ defmodule TictactoeWeb.Router do
     plug :accepts, ["json"]
   end
 
+  scope "/api", TictactoeWeb do
+    pipe_through :api
+
+    resources "/version", VersionController, only: [:index]
+  end
+
   scope "/", TictactoeWeb do
     pipe_through :browser
 
     get "/*path", PageController, :index
   end
-
-  # Other scopes may use custom stacks.
-  # scope "/api", TictactoeWeb do
-  #   pipe_through :api
-  # end
 end
