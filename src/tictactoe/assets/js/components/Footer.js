@@ -19,7 +19,7 @@ class Footer extends React.Component {
         return(
             <div>Version: {this.state.version}</div>
         );
-      }
+    }
 }
 
 export default Footer;

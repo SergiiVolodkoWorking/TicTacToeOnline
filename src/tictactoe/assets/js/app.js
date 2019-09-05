@@ -7,11 +7,10 @@ import Footer from './components/Footer'
 
 const Main = () => 
     <div>
-        <header>
-            <h1>Tic Tac Toe will be here soon!</h1>
-            <GameMenu />
-            <Board />
-        </header>
+        <h1>Tic Tac Toe will be here soon!</h1>
+        <GameMenu />
+        <Board />
+        <hr/>
         <Footer />
     </div>
 
