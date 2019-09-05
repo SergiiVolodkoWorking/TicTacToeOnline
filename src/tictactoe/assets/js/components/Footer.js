@@ -15,8 +15,10 @@ class Footer extends React.Component {
             {version: data.version}))
     }
 
-    render() {return(
-        <div>Version: {this.state.version}</div>)
+    render() {
+        return(
+            <div>Version: {this.state.version}</div>
+        );
       }
 }
 
