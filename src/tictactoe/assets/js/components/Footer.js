@@ -17,7 +17,7 @@ class Footer extends React.Component {
 
     render() {
         return(
-            <div>Version: {this.state.version}</div>
+            <div>Version: <span id='version'>{this.state.version}</span></div>
         );
     }
 }
