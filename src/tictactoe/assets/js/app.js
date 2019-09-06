@@ -5,12 +5,12 @@ import GameMenu from './components/GameMenu'
 import Board from './components/Board'
 import Footer from './components/Footer'
 
-const Main = () => 
+const Main = () =>
     <div>
         <h1>Tic Tac Toe will be here soon!</h1>
         <GameMenu />
         <Board />
-        <hr/>
+        <hr />
         <Footer />
     </div>
 
