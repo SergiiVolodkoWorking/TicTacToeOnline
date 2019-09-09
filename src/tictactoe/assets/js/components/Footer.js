@@ -1,5 +1,4 @@
 import * as React from 'react'
-import 'bootstrap'
 
 class Footer extends React.Component {
     constructor() {
