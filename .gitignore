@@ -7,3 +7,5 @@ erl_crash.dump
 *.ez
 *.beam
 /config/*.secret.exs
+/test/node_modules/
+/test/cypress/snapshots/All Specs/__diff_output__
