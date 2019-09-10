@@ -5,10 +5,7 @@ import GameMenu from './components/GameMenu'
 import Board from './components/Board'
 import Footer from './components/Footer'
 
-// Important for bootstrap js to work
-import $ from 'jquery';
-window.jQuery = $;
-window.$ = $;
+import app from './../css/app.css'
 
 const Main = () =>
     <div>
