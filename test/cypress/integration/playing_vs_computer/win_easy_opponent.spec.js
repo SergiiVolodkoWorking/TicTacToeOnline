@@ -1,13 +1,15 @@
+import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
+addMatchImageSnapshotCommand();
+
 describe('Win easy opponent', function(){
-    it('happy path', function() {
-        cy.visit('/')
+  it('Opens the game', function() {
+    cy.visit('/')
+    cy.matchImageSnapshot('Expected Start Menu');
+  })
 
-        // see start menu
-        // don't see board
-
-        // click start button
-
-        // no longer see start menu
-        // see game board
+  it('Starts a game round against an easy bot', function() {
+    cy.wait(100)
+    cy.get('#start-easy-btn').click()
+    cy.matchImageSnapshot('Expected Empty Board');
   })
 })
