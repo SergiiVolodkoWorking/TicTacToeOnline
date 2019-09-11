@@ -7,9 +7,9 @@ class App extends React.Component {
     render(){
         return(
             <div>
-                <h1>Welcome to Tic Tac Toe online!</h1>
-                <InteractiveGameMenu />
+                <h1 className='tictactoe-header'>Welcome to Tic Tac Toe online!</h1>
                 <InteractiveBoard />
+                <InteractiveGameMenu />
                 <hr />
                 <Footer />
             </div>

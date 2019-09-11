@@ -8,12 +8,16 @@ const GameMenu = ({ gameState, startGame }) => {
         return (null)
     }
     return(
-        <div>
-            <br />
-            <button id='start-easy-btn' className="btn-lg btn-success" onClick ={() => startGame()}>
-                <i className="fas fa-play-circle"></i> Start VS Easy bot
-            </button>
-            <br /><br />
+        <div className='card-img-overlay bg-gradient-light menu-as-popup mt-5'>
+            <div className='card border-success large'>
+                <div className="card-body text-secondary">
+                    <br />
+                    <button id='start-easy-btn' className="btn-lg btn-success" onClick ={() => startGame()}>
+                        <i className="fas fa-play-circle"></i> Start VS Easy bot
+                    </button>
+                    <br /><br />
+                </div>
+            </div>
         </div>
     )
 }

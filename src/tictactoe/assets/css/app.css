@@ -1,4 +1,7 @@
-h2{
-    margin-top: 20px;
-    margin-bottom: 20px;
+.menu-as-popup {
+    background: rgba(144,144,144,0.3);
+}
+
+.tictactoe-header{
+    color: rgb(144,144,144)
 }
