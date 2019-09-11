@@ -10,6 +10,9 @@ const GameMenu = ({ gameState, startGame }) => {
     return(
         <div className='card-img-overlay bg-gradient-light menu-as-popup mt-5'>
             <div className='card border-success large'>
+                <div className="card-header">
+                    <h4>Menu</h4>
+                </div>
                 <div className="card-body text-secondary">
                     <br />
                     <button id='start-easy-btn' className="btn-lg btn-success" onClick ={() => startGame()}>
