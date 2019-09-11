@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { GameRoundState } from '../actions'
+import { GameActions } from '../actions'
 import GameMenu from '../components/GameMenu'
 
 const mapStateToProps = state => ({
@@ -7,7 +7,13 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  startGame: () =>  dispatch({type: GameRoundState.NOT_STARTED})
+  startGame: () =>  {
+    dispatch({type: GameActions.START_ROUND})
+
+    fetch('api/start_game', {method: 'POST'})
+        .then(response => { return response.json(); })
+        .then(data => dispatch({type: GameActions.START_ROUND}) )
+    }
 })
 
 export default connect(

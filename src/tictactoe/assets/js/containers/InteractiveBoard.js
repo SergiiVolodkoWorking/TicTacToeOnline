@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { GameRoundState } from '../actions'
+import { GameActions } from '../actions'
 import Board from '../components/Board'
 
 
@@ -8,7 +8,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  makeMove: () =>  dispatch({type: GameRoundState.PLAYER_MOVES})
+  makeMove: () =>  dispatch({type: GameActions.MAKE_MOVE})
 })
 
 export default connect(

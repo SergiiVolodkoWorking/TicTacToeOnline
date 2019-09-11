@@ -1,5 +1,5 @@
 
-import { GameRoundState } from '../actions'
+import { GameRoundState, GameActions } from '../actions'
 
 const initialState = {
     gameState: GameRoundState.NOT_STARTED
@@ -7,7 +7,7 @@ const initialState = {
 
 const tictactoeFSM = function(state = initialState, action) {
     switch(action.type) {
-        case GameRoundState.NOT_STARTED:
+        case GameActions.START_ROUND:
             return { gameState: GameRoundState.PLAYER_MOVES }
     }
     return state

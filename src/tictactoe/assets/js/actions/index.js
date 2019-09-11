@@ -5,3 +5,8 @@ export const GameRoundState = {
   PLAYER_WON: 'PLAYER_WON',
   DRAW: 'DRAW',
 }
+
+export const GameActions = {
+  START_ROUND: 'START_ROUND',
+  MAKE_MOVE: 'MAKE_MOVE'
+}
