@@ -23,6 +23,14 @@ defmodule TictactoeWeb.ConnCase do
 
       # The default endpoint for testing
       @endpoint TictactoeWeb.Endpoint
+
+      @test_data_folder './test/tictactoe_web/test_data'
+
+      def json_from(file_name) do
+        "#{@test_data_folder}/#{file_name}"
+        |> File.read!()
+        |> Jason.decode!()
+      end
     end
   end
 
