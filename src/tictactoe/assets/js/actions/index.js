@@ -10,3 +10,4 @@ export const GameActions = {
   START_ROUND: 'START_ROUND',
   MAKE_MOVE: 'MAKE_MOVE'
 }
+

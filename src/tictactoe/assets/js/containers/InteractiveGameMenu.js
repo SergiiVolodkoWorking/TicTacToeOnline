@@ -8,11 +8,19 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   startGame: () =>  {
-    dispatch({type: GameActions.START_ROUND})
+    var body = {game_id: new Date().getTime()}
+    const settings = {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body)
+    }
 
-    fetch('api/start_game', {method: 'POST'})
+    fetch('api/start_game', settings)
         .then(response => { return response.json(); })
-        .then(data => dispatch({type: GameActions.START_ROUND}) )
+        .then(data => {console.log(data); return dispatch({type: GameActions.START_ROUND})} )
     }
 })
 
