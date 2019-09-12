@@ -17,6 +17,8 @@ defmodule TictactoeWeb.Router do
     pipe_through :api
 
     resources "/version", VersionController, only: [:index]
+
+    resources "/start_game", GameController, only: [:create]
   end
 
   scope "/", TictactoeWeb do
