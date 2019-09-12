@@ -9,3 +9,4 @@ erl_crash.dump
 /config/*.secret.exs
 /test/node_modules/
 /test/cypress/snapshots/All Specs/__diff_output__
+/data
