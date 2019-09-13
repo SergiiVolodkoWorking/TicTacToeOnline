@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { GameActions } from '../actions'
+import { GameEvents } from '../actions'
 import GameMenu from '../components/GameMenu'
 
 import { makePostRequest } from '../api'
@@ -11,7 +11,10 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   startGame: () => {
       var body = {game_id: new Date().getTime()}
-      makePostRequest('api/start_game', body, (data)=>{return dispatch({type: GameActions.START_ROUND})})
+      makePostRequest(
+        'api/start_game',
+        body,
+        data => { return dispatch({type: GameEvents.START_ROUND}) })
     }
 })
 

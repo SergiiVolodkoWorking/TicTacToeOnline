@@ -1,5 +1,5 @@
 
-export function makePostRequest(url, body, successHandler){
+export function makePostRequest(url, body, onSuccess){
     const settings = {
         method: 'POST',
         headers: {
@@ -10,11 +10,11 @@ export function makePostRequest(url, body, successHandler){
     }
     return fetch(url, settings)
         .then(response => { return response.json(); })
-        .then(data => successHandler(data))
+        .then(data => onSuccess(data))
 }
 
-export function makeGetRequest(url, successHandler){
+export function makeGetRequest(url, onSuccess){
     fetch(url)
         .then(response => { return response.json(); })
-        .then(data => successHandler(data))
+        .then(data => onSuccess(data))
 }

@@ -10,8 +10,7 @@ class Footer extends React.Component {
     }
 
     componentDidMount() {
-        makeGetRequest(
-            'api/version',
+        makeGetRequest('api/version',
             data => this.setState({ version: data.version }))
     }
 
