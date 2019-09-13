@@ -19,9 +19,13 @@ defmodule Tictactoe.MixProject do
   def application do
     [
       mod: {Tictactoe.Application, []},
-      extra_applications: [:logger, :runtime_tools]
+      extra_applications: [:logger, :runtime_tools],
+      applications: applications(Mix.env)
     ]
   end
+
+  defp applications(:test), do: applications(:all) ++ [:blacksmith]
+  defp applications(_all),  do: [:logger]
 
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
@@ -39,7 +43,9 @@ defmodule Tictactoe.MixProject do
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
-      {:elixir_uuid, "~> 1.2"}
+      {:elixir_uuid, "~> 1.2"},
+      {:faker, "~> 0.12", only: :test},
+      {:blacksmith, "~> 0.1", only: :test}
     ]
   end
 end
