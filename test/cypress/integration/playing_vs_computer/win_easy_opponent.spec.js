@@ -8,8 +8,14 @@ describe('Win easy opponent', function(){
   })
 
   it('Starts a game round against an easy bot', function() {
-    cy.wait(100)
+    cy.wait(10)
     cy.get('#start-easy-btn').click()
+    cy.matchImageSnapshot('Expected Loading Spinner');
+  })
+
+  it('Waits few milliseconds until the round is lunch', function() {
+    cy.wait(500)
     cy.matchImageSnapshot('Expected Empty Board');
   })
+
 })
