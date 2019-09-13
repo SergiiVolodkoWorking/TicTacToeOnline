@@ -2,25 +2,16 @@ import { connect } from 'react-redux'
 import { GameActions } from '../actions'
 import GameMenu from '../components/GameMenu'
 
+import { makePostRequest } from '../api'
+
 const mapStateToProps = state => ({
   gameState: state.tictactoeFSM.gameState
 })
 
 const mapDispatchToProps = dispatch => ({
-  startGame: () =>  {
-    var body = {game_id: new Date().getTime()}
-    const settings = {
-      method: 'POST',
-      headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(body)
-    }
-
-    fetch('api/start_game', settings)
-        .then(response => { return response.json(); })
-        .then(data => {console.log(data); return dispatch({type: GameActions.START_ROUND})} )
+  startGame: () => {
+      var body = {game_id: new Date().getTime()}
+      makePostRequest('api/start_game', body, (data)=>{return dispatch({type: GameActions.START_ROUND})})
     }
 })
 
