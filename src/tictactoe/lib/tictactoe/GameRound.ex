@@ -1,9 +1,22 @@
 defmodule Tictactoe.GameRound do
   @callback start(String, Map) :: Map
-  @callback save(Map) :: String
-  @callback load(String) :: Map
 
   alias Tictactoe.JsonRepository, as: JsonRepository
+
+  # Space = %{
+  #   EMPTY: 0,
+  #   PLAYER_1: 1,
+  #   PLAYER_2: 2,
+  # }
+
+  # GameState = %{
+  #   NOT_STARTED : 0,
+  #   PLAYER_1_MOVES: 1,
+  #   PLAYER_2_MOVES: 2,
+  #   PLAYER_WON: 3,
+  #   DRAW: 4,
+  # }
+
 
   def start(game_id, setup) do
     %{
@@ -14,16 +27,5 @@ defmodule Tictactoe.GameRound do
               :EMPTY_SPACE,:EMPTY_SPACE,:EMPTY_SPACE,
               :EMPTY_SPACE,:EMPTY_SPACE,:EMPTY_SPACE]
     }
-  end
-
-  def save(round) do
-    file_name = "game-round-#{round.game_id}"
-    JsonRepository.save(file_name, round)
-    {:ok, round.game_id}
-  end
-
-  def load(game_id) do
-    file_name = "game-round-#{game_id}"
-    JsonRepository.load(file_name)
   end
 end
