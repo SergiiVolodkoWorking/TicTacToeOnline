@@ -2,6 +2,9 @@ ExUnit.start()
 Faker.start()
 
 defmodule Fixtures do
+
+  def spaceEmpty, do: Map.fetch(Tictactoe.Enums.space, EMPTY)
+
   def randomSymbol() do
     x = :rand.uniform(255)
     List.to_string([x])

@@ -1,16 +1,17 @@
 defmodule Tictactoe.GameRound do
   @callback start(String, Map) :: Map
 
-  alias Tictactoe.JsonRepository, as: JsonRepository
+  #import Tictactoe.Enums
 
   def start(game_id, setup) do
+    empty = Map.fetch(Tictactoe.Enums.space, EMPTY)
     %{
       game_id: game_id,
       round_setup: setup,
-      round_state: :PLAYER_1_MOVES,
-      board: [:EMPTY_SPACE,:EMPTY_SPACE,:EMPTY_SPACE,
-              :EMPTY_SPACE,:EMPTY_SPACE,:EMPTY_SPACE,
-              :EMPTY_SPACE,:EMPTY_SPACE,:EMPTY_SPACE]
+      round_state: Map.fetch(Tictactoe.Enums.gameState, PLAYER_1_MOVES),
+      board: [empty, empty, empty,
+              empty, empty, empty,
+              empty, empty, empty]
     }
   end
 end
