@@ -3,7 +3,9 @@ Faker.start()
 
 defmodule Fixtures do
 
-  def spaceEmpty, do: Map.fetch(Tictactoe.Enums.space, EMPTY)
+  def spaceEmpty do
+    Tictactoe.Enums.space[:EMPTY]
+  end
 
   def randomSymbol() do
     x = :rand.uniform(255)

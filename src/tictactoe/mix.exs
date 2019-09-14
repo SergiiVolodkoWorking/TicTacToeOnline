@@ -45,7 +45,8 @@ defmodule Tictactoe.MixProject do
       {:plug_cowboy, "~> 2.0"},
       {:elixir_uuid, "~> 1.2"},
       {:faker, "~> 0.12", only: :test},
-      {:blacksmith, "~> 0.1", only: :test}
+      {:blacksmith, "~> 0.1", only: :test},
+      {:mockery, "~> 2.3.0", runtime: false}
     ]
   end
 end
