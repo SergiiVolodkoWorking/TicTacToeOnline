@@ -13,7 +13,7 @@ describe('Win easy opponent', function(){
     cy.matchImageSnapshot('Expected Loading Spinner');
   })
 
-  it('Waits few milliseconds until the round is lunch', function() {
+  it('Waits few milliseconds until the round is lunched', function() {
     cy.wait(500)
     cy.matchImageSnapshot('Expected Empty Board');
   })

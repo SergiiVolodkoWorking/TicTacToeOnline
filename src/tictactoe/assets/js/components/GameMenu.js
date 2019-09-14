@@ -4,10 +4,10 @@ import { GameRoundState } from '../actions'
 
 const GameMenu = ({ gameState, startGame }) => {
     const menuIsVisible = gameState == GameRoundState.NOT_STARTED
-    if(!menuIsVisible){
+    if (!menuIsVisible) {
         return (null)
     }
-    return(
+    return (
         <div className='card-img-overlay bg-gradient-light menu-as-popup mt-5'>
             <div className='card border-success large'>
                 <div className="card-header">
@@ -15,7 +15,7 @@ const GameMenu = ({ gameState, startGame }) => {
                 </div>
                 <div className="card-body text-secondary">
                     <br />
-                    <button id='start-easy-btn' className="btn-lg btn-success" onClick ={() => startGame()}>
+                    <button id='start-easy-btn' className="btn-lg btn-success" onClick={() => startGame()}>
                         <i className="fas fa-play-circle"></i> Start VS Easy bot
                     </button>
                     <br /><br />
@@ -24,7 +24,7 @@ const GameMenu = ({ gameState, startGame }) => {
         </div>
     )
 }
-  
+
 GameMenu.propTypes = {
     gameState: PropTypes.string.isRequired,
     startGame: PropTypes.func.isRequired

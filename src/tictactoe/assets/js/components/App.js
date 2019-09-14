@@ -5,8 +5,8 @@ import InteractiveBoard from '../containers/InteractiveBoard'
 import Footer from './Footer'
 
 class App extends React.Component {
-    render(){
-        return(
+    render() {
+        return (
             <div>
                 <h1 className='tictactoe-header'>Welcome to Tic Tac Toe online!</h1>
                 <Spinner />
@@ -15,7 +15,8 @@ class App extends React.Component {
                 <hr />
                 <Footer />
             </div>
-    )}
+        )
+    }
 }
 
 export default App

@@ -6,9 +6,9 @@ const Board = ({ gameState }) => {
 
     const MoveInfo = () => (<h3>Click empty cell to make your move</h3>)
 
-    return(
+    return (
         <div className="">
-            {isPlayersTurn && <MoveInfo/>}
+            {isPlayersTurn && <MoveInfo />}
             <div className="grid-container">
                 <div className="grid-item"> </div>
                 <div className="grid-item"> </div>

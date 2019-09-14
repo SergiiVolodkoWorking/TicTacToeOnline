@@ -10,12 +10,12 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   startGame: () => {
-      var body = {game_id: new Date().getTime()}
-      makePostRequest(
-        'api/start_game',
-        body,
-        data => { return dispatch({type: GameEvents.START_ROUND}) })
-    }
+    var body = { game_id: new Date().getTime() }
+    makePostRequest(
+      'api/start_game',
+      body,
+      data => dispatch({ type: GameEvents.START_ROUND }))
+  }
 })
 
 export default connect(

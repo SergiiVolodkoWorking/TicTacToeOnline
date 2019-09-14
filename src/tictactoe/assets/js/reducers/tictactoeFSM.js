@@ -13,13 +13,13 @@ const allTransitions = [
     // PLAYER_WON / DRAW + SHOW_RESULT => ROUND_COMPLETED
 ]
 
-const tictactoeFSM = function(state = initialState, action) {
-    var event = action.type
-    var currentState = state.gameState;
+const tictactoeFSM = function (state = initialState, action) {
+    const event = action.type
+    const currentState = state.gameState;
 
-    var transition = allTransitions.find(function(t) {
+    const transition = allTransitions.find(function (t) {
         return t.event === event &&
-                t.from === currentState;
+            t.from === currentState;
     });
     if (!transition) {
         return state;
