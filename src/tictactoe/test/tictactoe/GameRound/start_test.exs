@@ -1,7 +1,7 @@
 defmodule Tictactoe.GameRoundTests do
   use ExUnit.Case
   import Tictactoe.Enums
-  alias Tictactoe.GameRound, as: SUT
+  alias Tictactoe.GameRound, as: GameRound
 
   describe "when game round start is called" do
     test "initial game state is returned" do
@@ -19,7 +19,7 @@ defmodule Tictactoe.GameRoundTests do
                 emptySpace, emptySpace, emptySpace,
                 emptySpace, emptySpace, emptySpace]
       }
-      assert expected == SUT.start(game_id, setup)
+      assert expected == GameRound.start(game_id, setup)
     end
   end
 end

@@ -1,9 +1,7 @@
 defmodule Tictactoe.RoundSetupBuilderTest do
   use ExUnit.Case
   import Tictactoe.Enums
-  alias Tictactoe.RoundSetupBuilder, as: SUT
-
-  #@Some_module Application.get_env(:app, :key)
+  alias Tictactoe.RoundSetupBuilder, as: Builder
 
   describe "when init_setup is called" do
     test "it creates initial round setup" do
@@ -12,7 +10,7 @@ defmodule Tictactoe.RoundSetupBuilderTest do
         first_player: %{type: playerType()[:HUMAN], symbol: "X"},
         second_player: %{type: playerType()[:BOT_EASY], symbol: "O"},
       }
-      assert expected == SUT.init_setup()
+      assert expected == Builder.init_setup()
     end
   end
 end

@@ -65,9 +65,3 @@ config :phoenix, :stacktrace_depth, 20
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime
-
-# if Mix.env() == :test do
-#   config :app, :key, MyMOduleMOck
-# else
-#   config :app, :key, MyModule
-# end
