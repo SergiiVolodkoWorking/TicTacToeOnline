@@ -10,23 +10,43 @@
   display: grid;
   grid-gap: 15px;
   grid-template-columns: auto auto auto;
-  background: #bbada0;;
+  background: #bbada0;
   padding: 15px;
   border-radius: 6px;
 }
 
 .grid-item {
-  background-color: rgba(238, 228, 218, 0.35);
+  color: white;
+  font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
   padding: 12px;
   font-size: 70px;
   text-align: center;
   border-radius: 3px;
   min-height: 12rem;
-  cursor: pointer;
 }
 
-.grid-item-symbol{
+.available-space{
+  background-color: rgba(238, 228, 218, 0.3);
+}
+
+.available-space:hover{
+  cursor: pointer;
+  background-color:rgba(34, 167, 240, .25);
+
+}
+
+.players-space{
+  background-color:rgba(34, 167, 240, .75);
   animation: grow .1s;
+}
+
+.opponents-space{
+  background-color:#f59563;
+}
+
+.space-symbol{
+  margin-top: 10%;
+  font-weight: bold;
 }
 
 @keyframes grow {

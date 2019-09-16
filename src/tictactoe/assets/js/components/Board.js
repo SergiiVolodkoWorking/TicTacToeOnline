@@ -3,23 +3,22 @@ import PropTypes from 'prop-types'
 import { GameRoundState } from '../actions'
 
 class Board extends React.Component {
-
     constructor(props){
         super(props)
         this.state = {
-            board: props.board,
-            symbolClass: ""
+            board: props.board
         }
     }
 
     onMove(e, index) {
         const board = this.state.board
+        if(board[index] != 0) {
+            return;
+        }
         board[index] = 1
         this.setState({
-            board: board,
-            symbolClass: "grid-item-symbol"
+            board: board
         })
-        console.log(e)
     }
 
     mapSpaceSymbol(space) {
@@ -28,6 +27,14 @@ class Board extends React.Component {
             case 2: return "O"
         }
         return " "
+    }
+
+    mapSpaceClass(space){
+        switch(space){
+            case 1: return "grid-item players-space"
+            case 2: return "grid-item opponents-space"
+        }
+        return "grid-item available-space"
     }
 
     render(){
@@ -40,8 +47,8 @@ class Board extends React.Component {
         const isPlayersTurn = gameState == GameRoundState.PLAYER_1_MOVES
 
         const spaces = this.state.board.map((space, index) => 
-            <div key={index} className="grid-item" onClick={e => this.onMove(e, index)}>
-                <div className="grid-item-symbol">{this.mapSpaceSymbol(space)}</div>
+            <div key={index} className={this.mapSpaceClass(space)} onClick={e => this.onMove(e, index)}>
+                <div className="space-symbol">{this.mapSpaceSymbol(space)}</div>
             </div>)
 
         return (
