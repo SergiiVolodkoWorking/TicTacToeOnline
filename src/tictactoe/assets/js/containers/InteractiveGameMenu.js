@@ -14,7 +14,7 @@ const mapDispatchToProps = dispatch => ({
     makePostRequest(
       'api/start_game',
       body,
-      data => dispatch({ type: GameEvents.START_ROUND }))
+      data => dispatch({ type: GameEvents.START_ROUND, game_round: data}))
   }
 })
 
