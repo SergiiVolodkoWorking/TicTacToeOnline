@@ -5,7 +5,8 @@ import { makeGetRequest } from '../api'
 
 const mapStateToProps = state => ({
   gameState: state.tictactoeFSM.gameState,
-  gameId: state.tictactoeFSM.game_id
+  gameId: state.tictactoeFSM.game_id,
+  board: state.tictactoeFSM.board
 })
 
 const mapDispatchToProps = dispatch => ({

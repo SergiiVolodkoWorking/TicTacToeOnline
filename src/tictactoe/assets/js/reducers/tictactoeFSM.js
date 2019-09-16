@@ -2,7 +2,8 @@
 import { GameRoundState, GameEvents } from '../actions'
 
 const initialState = {
-    gameState: GameRoundState.NOT_STARTED
+    gameState: GameRoundState.NOT_STARTED,
+    board: [0, 0, 0, 0, 0, 0, 0, 0, 0]
 }
 
 const allTransitions = [
@@ -26,16 +27,17 @@ const tictactoeFSM = function (state = initialState, action) {
         return state;
     }
     
-    const game_round = mapGameRound(action.game_round)
+    const game_round = mapGameRound(action.game_round, state)
     const transition_to = mapNewState(game_round, transition.to)
-
+    console.log(transition_to)
     return { 
         gameState: transition_to,
-        game_id: game_round.game_id
+        game_id: game_round.game_id,
+        board: game_round.board
     }
 }
 
-const mapGameRound = function(gameRoundData){
+const mapGameRound = function(gameRoundData, currentState){
     let gameRound = {}
 
     if(gameRoundData.game_id){
@@ -44,6 +46,13 @@ const mapGameRound = function(gameRoundData){
 
     if(gameRoundData.round_state){
         gameRound.round_state = gameRoundData.round_state
+    }
+    
+    if(gameRoundData.board){
+        gameRound.board = gameRoundData.board
+    }
+    else{
+        gameRound.board = currentState.board
     }
 
     return gameRound
