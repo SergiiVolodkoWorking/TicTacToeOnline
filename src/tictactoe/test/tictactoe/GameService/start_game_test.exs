@@ -17,36 +17,7 @@ defmodule Tictactoe.GameServiceTests do
   end
 
   describe "when start is called" do
-    test "calls setup builder init setup" do
-      game_id  = Faker.UUID.v4()
-
-      Service.start_game(game_id)
-      assert_called Builder, :init_setup
-    end
-
-    test "calls game round start" do
-      game_id  = Faker.UUID.v4()
-      setup = Forge.round_setup
-
-      mock Builder, :init_setup, setup
-
-      Service.start_game(game_id)
-      assert_called Round, :start, [^game_id , ^setup]
-    end
-
-    test "calls repository save" do
-      game_id  = Faker.UUID.v4()
-      setup = Forge.round_setup
-      round = Forge.game_round
-
-      mock Builder, :init_setup, setup
-      mock Round, :start, round
-
-      Service.start_game(game_id)
-      assert_called Repo, :save, [^round]
-    end
-
-    test "returns saved game id" do
+    test "initializes a game round and returns saved game id" do
       game_id  = Faker.UUID.v4()
       saved_id = Faker.UUID.v4()
       setup = Forge.round_setup
@@ -56,9 +27,15 @@ defmodule Tictactoe.GameServiceTests do
       mock Round, :start, round
       mock Repo, :save, saved_id
 
+      actual = Service.start_game(game_id)
+
+      assert_called Builder, :init_setup
+      assert_called Round, :start, [^game_id , ^setup]
+      assert_called Repo, :save, [^round]
+
       expected = %{game_id: saved_id}
 
-      assert expected == Service.start_game(game_id)
+      assert actual == expected
     end
   end
 end
