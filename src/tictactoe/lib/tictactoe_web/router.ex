@@ -19,6 +19,7 @@ defmodule TictactoeWeb.Router do
     resources "/version", VersionController, only: [:index]
 
     resources "/start_game", GameController, only: [:create]
+    resources "/game", GameController, only: [:show]
   end
 
   scope "/", TictactoeWeb do

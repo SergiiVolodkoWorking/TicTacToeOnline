@@ -1,6 +1,7 @@
 defmodule Tictactoe.GameService do
   import Mockery.Macro
   @callback start_game(String, Map) :: Map
+  @callback get_game(String, Map) :: Map
 
   alias Tictactoe.RoundSetupBuilder, as: RoundSetupBuilder
   alias Tictactoe.GameRound, as: GameRound
@@ -12,5 +13,9 @@ defmodule Tictactoe.GameService do
     saved_id = mockable(GameRepository).save(round)
 
     %{game_id: saved_id}
+  end
+
+  def get_game(game_id) do
+    mockable(GameRepository).load(game_id)
   end
 end

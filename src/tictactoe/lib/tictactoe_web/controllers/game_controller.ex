@@ -8,4 +8,9 @@ defmodule TictactoeWeb.GameController do
     result = GameService.start_game(game_id)
     json(conn, result)
   end
+
+  def show(conn, %{"id" => game_id}) do
+    result = GameService.get_game(game_id)
+    json(conn, result)
+  end
 end
