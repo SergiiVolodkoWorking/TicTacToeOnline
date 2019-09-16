@@ -2,31 +2,56 @@ import * as React from 'react'
 import PropTypes from 'prop-types'
 import { GameRoundState } from '../actions'
 
-const Board = ({ gameState, gameId, board, updateRound }) => {
-    setInterval(() => {
-        if(gameState == GameRoundState.WAITING_UPDATE) updateRound(gameId)}
-        , 1000);
+class Board extends React.Component {
 
-    const MoveInfo = () => (<h3>Click empty cell to make your move</h3>)
-    const isPlayersTurn = gameState == GameRoundState.PLAYER_1_MOVES
+    constructor(props){
+        super(props)
+        this.state = {
+            board: props.board,
+            symbolClass: ""
+        }
+    }
 
-    const mapSpaceSymbol = function(space){
+    onMove(e, index) {
+        const board = this.state.board
+        board[index] = 1
+        this.setState({
+            board: board,
+            symbolClass: "grid-item-symbol"
+        })
+        console.log(e)
+    }
+
+    mapSpaceSymbol(space) {
         switch(space){
             case 1: return "X"
             case 2: return "O"
         }
         return " "
     }
-    const spaces = board.map((space, index) => 
-        <div key={index} className="grid-item">{mapSpaceSymbol(space)}</div>)
-    return (
-        <div className="">
-            {isPlayersTurn && <MoveInfo />}
-            <div className="grid-container">
-                {spaces}
-            </div>
-        </div>
-    )
+
+    render(){
+        const { gameState, gameId, _board, updateRound } = this.props
+        setInterval(() => {
+            if(gameState == GameRoundState.WAITING_UPDATE) updateRound(gameId)}
+            , 1000);
+
+        const MoveInfo = () => (<h3>Click empty cell to make your move</h3>)
+        const isPlayersTurn = gameState == GameRoundState.PLAYER_1_MOVES
+
+        const spaces = this.state.board.map((space, index) => 
+            <div key={index} className="grid-item" onClick={e => this.onMove(e, index)}>
+                <div className="grid-item-symbol">{this.mapSpaceSymbol(space)}</div>
+            </div>)
+
+        return (
+            <div className="">
+                {isPlayersTurn && <MoveInfo />}
+                <div className="grid-container">
+                    {spaces}
+                </div>
+            </div>)
+    }
 }
 
 Board.propTypes = {

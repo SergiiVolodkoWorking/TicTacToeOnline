@@ -25,6 +25,19 @@
   cursor: pointer;
 }
 
+.grid-item-symbol{
+  animation: grow .1s;
+}
+
+@keyframes grow {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
 h3{
   color:rgba(34, 167, 240, 1)
 }
