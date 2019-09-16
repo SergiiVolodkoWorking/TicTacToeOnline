@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { makeGetRequest } from '../api'
 
 class Footer extends React.Component {
     constructor() {
@@ -9,13 +10,12 @@ class Footer extends React.Component {
     }
 
     componentDidMount() {
-        fetch('api/version')
-            .then(response => { return response.json(); })
-            .then(data => this.setState({ version: data.version }))
+        makeGetRequest('api/version',
+            data => this.setState({ version: data.version }))
     }
 
     render() {
-        return(
+        return (
             <div>Version: <span id='version'>{this.state.version}</span></div>
         );
     }

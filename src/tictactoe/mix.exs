@@ -26,7 +26,7 @@ defmodule Tictactoe.MixProject do
   # Specifies which paths to compile per environment.
   defp elixirc_paths(:test), do: ["lib", "test/support"]
   defp elixirc_paths(_), do: ["lib"]
-
+S
   # Specifies your project dependencies.
   #
   # Type `mix help deps` for examples and options.
@@ -38,7 +38,10 @@ defmodule Tictactoe.MixProject do
       {:phoenix_live_reload, "~> 1.2", only: :dev},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:faker, "~> 0.12", only: :test},
+      {:blacksmith, "~> 0.1", only: :test},
+      {:mockery, "~> 2.3.0", runtime: false}
     ]
   end
 end
