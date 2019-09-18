@@ -29,11 +29,24 @@ defmodule Tictactoe.GameRound do
   def get_round_state(board, player, currentState) do
     player1Moves = gameState()[:PLAYER_1_MOVES]
     player2Moves = gameState()[:PLAYER_2_MOVES]
+
     is_win = has_player_won(board, player)
+    is_draw = !Enum.member?(board, space()[:EMPTY])
     cond do
+      is_draw -> gameState()[:DRAW]
       is_win && currentState == player1Moves -> gameState()[:PLAYER_1_WON]
       is_win && currentState == player2Moves -> gameState()[:PLAYER_2_WON]
+      !is_win -> swap_players_turn(currentState)
       true -> currentState
+    end
+  end
+
+  def swap_players_turn(currentState) do
+    player1 = gameState()[:PLAYER_1_MOVES]
+    player2 = gameState()[:PLAYER_2_MOVES]
+    cond do
+      currentState == player1 -> player2
+      currentState == player2 -> player1
     end
   end
 
