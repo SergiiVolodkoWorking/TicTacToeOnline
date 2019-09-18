@@ -16,7 +16,7 @@ defmodule TictactoeWeb.GameController do
 
   def update(conn, %{"id" => game_id} = params) do
     taken_space = params["taken_space"]
-    result = GameService.make_move_against_bot(game_id, taken_space)
-    json(conn, result)
+    game_round = GameService.make_move_against_bot(game_id, taken_space)
+    json(conn, %{"game_id" => game_round.game_id})
   end
 end

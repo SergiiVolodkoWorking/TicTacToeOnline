@@ -11,7 +11,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
   updateRound: game_id => {
-    makeGetRequest(
+    makeGetRequest( 
       'api/game/' + game_id,
       data => dispatch({ type: GameEvents.ROUND_STATE_FETCHED, game_round: data }))
   },

@@ -17,23 +17,23 @@ const Board = ({ gameState, gameId, board, updateRound, makeMove }) => {
         }
         return "grid-item available-space"
     }
-    const visualizeMove = function(board, index){
+    const onMove = function(gameId, board, index){
+        if(board[index] != 0){
+            return;
+        }
         board[index] = 1
+        makeMove(gameId, index)
     }
 
     setInterval(() => {
         if(gameState == GameRoundState.WAITING_UPDATE) updateRound(gameId)}
-        ,1000);
+        , 1000);
 
-
-    const MoveInfo = () => (<h3>Click empty cell to make your move</h3>)
     const isHintToDisplay = gameState != GameRoundState.NOT_STARTED
+    const MoveInfo = () => (<h3>Click empty cell to make your move</h3>)
     const spaces = board.map((space, index) => 
         <div key={index} className={mapSpaceClass(space)} 
-            onClick={() => 
-                {visualizeMove(board, index);
-                makeMove(gameId, index)}
-            }>
+            onClick={() => onMove(gameId, board, index)}>
             <div className="space-symbol">{mapSpaceSymbol(space)}</div>
         </div>)
 

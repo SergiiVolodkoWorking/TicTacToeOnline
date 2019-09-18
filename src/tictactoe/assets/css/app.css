@@ -38,17 +38,19 @@
 
 .players-space{
   background-color:rgba(34, 167, 240, .75);
-  animation: grow .3s;
+  animation: grow .25s;
 }
 
 .opponents-space{
   background-color:#f59563;
-  animation: grow .3s;
+  cursor: default;
+  animation: grow .25s;
 }
 
 .space-symbol{
   margin-top: 10%;
   font-weight: bold;
+  cursor: default;
 }
 
 @keyframes grow {
