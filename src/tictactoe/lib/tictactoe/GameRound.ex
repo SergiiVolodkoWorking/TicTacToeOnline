@@ -1,5 +1,6 @@
 defmodule Tictactoe.GameRound do
   @callback start(String, Map) :: Map
+  @callback apply_move(Map, Map) :: Map
 
   import Tictactoe.Enums
 
@@ -13,5 +14,42 @@ defmodule Tictactoe.GameRound do
               empty, empty, empty,
               empty, empty, empty]
     }
+  end
+
+  def apply_move(game_round, move) do
+    board = game_round.board
+    board = List.replace_at(board, move.space, move.player)
+
+    round_state = get_round_state(board, move.player, game_round.round_state)
+
+    Map.put(game_round, :round_state, round_state)
+    |>Map.put(:board, board)
+  end
+
+  def get_round_state(board, player, currentState) do
+    player1Moves = gameState()[:PLAYER_1_MOVES]
+    player2Moves = gameState()[:PLAYER_2_MOVES]
+    is_win = has_player_won(board, player)
+    cond do
+      is_win && currentState == player1Moves -> gameState()[:PLAYER_1_WON]
+      is_win && currentState == player2Moves -> gameState()[:PLAYER_2_WON]
+      true -> currentState
+    end
+  end
+
+  def has_player_won(board, player) do
+    # Horizontal
+    (Enum.at(board, 0) == player && Enum.at(board, 1) == player && Enum.at(board, 2) == player) ||
+    (Enum.at(board, 3) == player && Enum.at(board, 4) == player && Enum.at(board, 5) == player) ||
+    (Enum.at(board, 6) == player && Enum.at(board, 7) == player && Enum.at(board, 8) == player) ||
+
+    # Vertical
+    (Enum.at(board, 0) == player && Enum.at(board, 3) == player && Enum.at(board, 6) == player) ||
+    (Enum.at(board, 1) == player && Enum.at(board, 4) == player && Enum.at(board, 7) == player) ||
+    (Enum.at(board, 2) == player && Enum.at(board, 5) == player && Enum.at(board, 8) == player) ||
+
+    # Diagonals
+    (Enum.at(board, 0) == player && Enum.at(board, 4) == player && Enum.at(board, 8) == player) ||
+    (Enum.at(board, 2) == player && Enum.at(board, 4) == player && Enum.at(board, 6) == player)
   end
 end

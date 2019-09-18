@@ -7,6 +7,13 @@ defmodule Fixtures do
     Tictactoe.Enums.space[:EMPTY]
   end
 
+  def emptyBoard do
+    empty = Tictactoe.Enums.space[:EMPTY]
+    [empty, empty, empty,
+    empty, empty, empty,
+    empty, empty, empty]
+  end
+
   def randomSymbol() do
     x = :rand.uniform(255)
     List.to_string([x])

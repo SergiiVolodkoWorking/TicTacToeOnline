@@ -9,8 +9,9 @@ defmodule Tictactoe.Enums do
     NOT_STARTED: 0,
     PLAYER_1_MOVES: 1,
     PLAYER_2_MOVES: 2,
-    PLAYER_WON: 3,
-    DRAW: 4
+    PLAYER_1_WON: 3,
+    PLAYER_2_WON: 4,
+    DRAW: 5
   }
 
   def playerType, do: %{
