@@ -20,6 +20,7 @@ defmodule TictactoeWeb.Router do
 
     resources "/start_game", GameController, only: [:create]
     resources "/game", GameController, only: [:show]
+    resources "/make_move", GameController, only: [:update]
   end
 
   scope "/", TictactoeWeb do

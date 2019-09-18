@@ -19,7 +19,7 @@ defmodule Tictactoe.GameJsonRepository do
     file_name = "game-round-#{game_id}.json"
     file_path = "#{@directory}/#{file_name}"
     json_raw = File.read!(file_path)
-    {:ok, content} = Jason.decode(json_raw)
+    {:ok, content} = Jason.decode(json_raw, keys: :atoms)
     content
   end
 end
