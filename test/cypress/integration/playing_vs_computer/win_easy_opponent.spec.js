@@ -17,5 +17,11 @@ describe('Win easy opponent', function(){
     cy.wait(500)
     cy.matchImageSnapshot('Expected Empty Board');
   })
+  it('Makes his first move', function() {
+    cy.wait(10)
+    cy.get('#space-4').click()
+    cy.wait(1000)
+    cy.matchImageSnapshot('Expected First move');
+  })
 
 })
