@@ -9,6 +9,7 @@ const initialState = {
 const allTransitions = [
     { event: GameEvents.START_ROUND, from: GameRoundState.NOT_STARTED, to: GameRoundState.WAITING_UPDATE },
     { event: GameEvents.ROUND_STATE_FETCHED, from: GameRoundState.WAITING_UPDATE, to: GameRoundState.PLAYER_TURN_FROM_SERVER },
+    { event: GameEvents.PLAYER_MOVED, from: GameRoundState.PLAYER_1_MOVES, to: GameRoundState.WAITING_UPDATE },
     
     // PLAYER_1_MOVES + MAKE_MOVE => WAITING_UPDATE
     // PLAYER_2_MOVES + GET_ROUND_STATE => PLAYER_1_MOVES / PLAYER_2_MOVES / PLAYER_WON / DRAW
@@ -29,7 +30,6 @@ const tictactoeFSM = function (state = initialState, action) {
     
     const game_round = mapGameRound(action.game_round, state)
     const transition_to = mapNewState(game_round, transition.to)
-    console.log(transition_to)
     return { 
         gameState: transition_to,
         game_id: game_round.game_id,

@@ -11,6 +11,6 @@ export const GameRoundState = Object.freeze({
 export const GameEvents = Object.freeze({
   START_ROUND: 'START_ROUND',
   ROUND_STATE_FETCHED: 'ROUND_STATE_FETCHED',
-  MAKE_MOVE: 'MAKE_MOVE',
+  PLAYER_MOVED: 'PLAYER_MOVED',
   SHOW_RESULT: 'SHOW_RESULT'
 })

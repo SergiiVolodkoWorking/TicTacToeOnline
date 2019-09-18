@@ -23,6 +23,7 @@
   text-align: center;
   border-radius: 3px;
   min-height: 12rem;
+  min-width: 75px;
 }
 
 .available-space{
@@ -37,11 +38,12 @@
 
 .players-space{
   background-color:rgba(34, 167, 240, .75);
-  animation: grow .1s;
+  animation: grow .3s;
 }
 
 .opponents-space{
   background-color:#f59563;
+  animation: grow .3s;
 }
 
 .space-symbol{
@@ -90,11 +92,11 @@ h3{
 
 .spinner-text {
   position: absolute;
-  left: 45%;
+  left: 35%;
   top: 40%;
   height: 100px;
-  width: 100px;
+  width: 400px;
   color: white;
-  font-size: 50px;
+  font-size: 40px;
   text-align: center;
 }
