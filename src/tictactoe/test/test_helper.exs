@@ -7,6 +7,25 @@ defmodule Fixtures do
     Tictactoe.Enums.space[:EMPTY]
   end
 
+  def randomPlayerSpace do
+    x = :rand.uniform(2)
+    cond do
+      x == 1 -> Tictactoe.Enums.space[:PLAYER_1]
+      x == 2 -> Tictactoe.Enums.space[:PLAYER_2]
+    end
+  end
+
+  def randomSpaceIndex do
+    :rand.uniform(9) - 1
+  end
+
+  def emptyBoard do
+    empty = Tictactoe.Enums.space[:EMPTY]
+    [empty, empty, empty,
+    empty, empty, empty,
+    empty, empty, empty]
+  end
+
   def randomSymbol() do
     x = :rand.uniform(255)
     List.to_string([x])
@@ -36,9 +55,4 @@ defmodule Forge do
       Fixtures.randomEnum(Tictactoe.Enums.space), Fixtures.randomEnum(Tictactoe.Enums.space), Fixtures.randomEnum(Tictactoe.Enums.space),
       Fixtures.randomEnum(Tictactoe.Enums.space), Fixtures.randomEnum(Tictactoe.Enums.space), Fixtures.randomEnum(Tictactoe.Enums.space),
       Fixtures.randomEnum(Tictactoe.Enums.space), Fixtures.randomEnum(Tictactoe.Enums.space), Fixtures.randomEnum(Tictactoe.Enums.space)]
-
-  # # this will create a user with roles set to [:admin]
-  # register :admin,
-  #   [prototype: :user],
-  #   roles: ["admin"]
 end
