@@ -3,24 +3,26 @@ defmodule TictactoeWeb.GameControllerTest do
   import Tictactoe.Enums
   alias Tictactoe.GameJsonRepository, as: Repo
 
-  test "POST /api/start_game/", %{conn: conn} do
-    game_id = "id-to-create-game"
-    conn = post(conn, "/api/start_game", %{game_id: game_id})
+  describe "Game round" do
+    test "Player can start the round", %{conn: conn} do
+      game_id = "id-to-create-game"
+      conn = post(conn, "/api/start_game", %{game_id: game_id})
 
-    actual = json_response(conn, 200)
+      actual = json_response(conn, 200)
 
-    assert %{"game_id" => game_id } == actual
-  end
+      assert %{"game_id" => game_id } == actual
+    end
 
-  test "GET /api/game/id", %{conn: conn} do
-    game_round = Forge.game_round
-    game_id = Repo.save(game_round)
-    expected = Jason.decode!(Jason.encode!(game_round))
+    test "Game can check current round state", %{conn: conn} do
+      game_round = Forge.game_round
+      game_id = Repo.save(game_round)
+      expected = Jason.decode!(Jason.encode!(game_round))
 
-    url = "/api/game/#{game_id}"
-    conn = get(conn, url)
+      url = "/api/game/#{game_id}"
+      conn = get(conn, url)
 
-    assert json_response(conn, 200) == expected
+      assert json_response(conn, 200) == expected
+    end
   end
 
   describe "Player makes move against bot (PUT /api/make_move)" do
@@ -28,6 +30,7 @@ defmodule TictactoeWeb.GameControllerTest do
       empty = Fixtures.spaceEmpty
       player1 = space()[:PLAYER_1]
       game_round = Forge.game_round(
+        game_id: "test-make-move",
         round_state: gameState()[:PLAYER_1_MOVES],
         board: [player1, player1, empty,
                 empty, empty, empty,
