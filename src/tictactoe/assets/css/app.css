@@ -1,9 +1,28 @@
+.tictactoe-header{
+  color: rgb(144,144,144)
+}
+
 .menu-as-popup {
   background: rgba(144,144,144,0.3);
 }
 
-.tictactoe-header{
-  color: rgb(144,144,144)
+.menu-not-started{
+  border-color: #28a745
+}
+
+.menu-victory{
+  border-color: rgb(34, 167, 240);
+  color: rgb(34, 167, 240);
+}
+
+.menu-defeat{
+  border-color: #f59563;
+  color: #f59563;
+}
+
+.menu-draw{
+  border-color: grey;
+  color: grey;
 }
 
 .grid-container {
