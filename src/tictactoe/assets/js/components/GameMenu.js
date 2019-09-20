@@ -3,33 +3,33 @@ import PropTypes from 'prop-types'
 import { GameRoundState } from '../actions'
 
 const GameMenu = ({ gameState, startGame }) => {
-    const isGameEnded = gameState == GameRoundState.PLAYER_1_WON ||
-                        gameState == GameRoundState.PLAYER_2_WON ||
-                        gameState == GameRoundState.DRAW
-    const isMenuVisible = 
-            isGameEnded || gameState == GameRoundState.NOT_STARTED
-        
+    const isGameEnded =
+        [GameRoundState.PLAYER_1_WON, GameRoundState.PLAYER_2_WON, GameRoundState.DRAW]
+            .includes(gameState)
+    const isMenuVisible =
+        isGameEnded || gameState == GameRoundState.NOT_STARTED
+
     if (!isMenuVisible) {
         return (null)
     }
     let menuTitle = 'Menu'
     let cardStyle = 'card large '
-    switch (gameState){
+    switch (gameState) {
         case GameRoundState.PLAYER_1_WON: {
             menuTitle = 'Victory !';
             cardStyle += 'menu-victory';
         } break;
         case GameRoundState.PLAYER_2_WON: {
-            menuTitle = 'Defeat'; 
+            menuTitle = 'Defeat';
             cardStyle += 'menu-defeat';
-        }break;
+        } break;
         case GameRoundState.DRAW: {
             menuTitle = 'Draw';
             cardStyle += 'menu-draw';
         } break;
         default: cardStyle += 'menu-not-started';
     }
-    
+
     const btnStyle = isGameEnded ? "btn-lg btn-light btn disabled" : "btn-lg btn-success"
 
     return (
@@ -41,7 +41,7 @@ const GameMenu = ({ gameState, startGame }) => {
                 <div className="card-body text-secondary">
                     <br />
                     <button id='start-easy-btn' className={btnStyle}
-                        onClick={() => {if(!isGameEnded) startGame()}}>
+                        onClick={() => { if (!isGameEnded) startGame() }}>
                         <i className="fas fa-play-circle"></i> Start VS Easy bot
                     </button>
                     <br /><br />
