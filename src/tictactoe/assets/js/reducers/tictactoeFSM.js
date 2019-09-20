@@ -42,7 +42,6 @@ const mapGameRound = function(gameRoundData, currentState){
 
     if(gameRoundData.game_id){
         gameRound.game_id = gameRoundData.game_id
-        console.log(gameRound.game_id )
     }
 
     if(gameRoundData.round_state){

@@ -22,4 +22,14 @@ describe('Win easy opponent', function(){
     cy.wait(1000)
     cy.matchImageSnapshot('Expected First move');
   })
+
+  it('Makes remaining moves to win ', function() {
+    cy.wait(1000)
+    cy.get('#space-1').click()
+    cy.wait(1000)
+
+    cy.get('#space-7').click()
+    cy.wait(1000)
+    cy.matchImageSnapshot('Expected Victory screen');
+  })
 })
