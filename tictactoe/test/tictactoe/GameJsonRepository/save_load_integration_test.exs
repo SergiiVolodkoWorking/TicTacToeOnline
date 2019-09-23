@@ -7,7 +7,7 @@ defmodule Tictactoe.GameJsonRepositoryTests do
       game = Forge.game_round
       id = game.game_id
       expected_file_name = "game-round-#{id}"
-      expected_file_path = "./../../data/#{expected_file_name}.json"
+      expected_file_path = "./../data/#{expected_file_name}.json"
       expected = Jason.decode!(Jason.encode!(game), keys: :atoms)
 
       # Save

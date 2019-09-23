@@ -2,7 +2,7 @@ defmodule Tictactoe.GameJsonRepository do
   @callback save(Map) :: String
   @callback load(String) :: Map
 
-  @directory "./../../data"
+  @directory "./../data"
 
   def save(round) do
     file_name = "game-round-#{round.game_id}.json"
