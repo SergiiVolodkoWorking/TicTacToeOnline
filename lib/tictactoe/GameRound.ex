@@ -31,9 +31,9 @@ defmodule Tictactoe.GameRound do
     is_win = has_player_won(board, player)
     is_draw = !Enum.member?(board, :EMPTY)
     cond do
-      is_draw -> :DRAW
       is_win && currentState == player1Moves -> :PLAYER_1_WON
       is_win && currentState == player2Moves -> :PLAYER_2_WON
+      is_draw -> :DRAW
       !is_win -> swap_players_turn(currentState)
       true -> currentState
     end
