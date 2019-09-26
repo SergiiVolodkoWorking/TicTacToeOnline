@@ -4,14 +4,14 @@ Faker.start()
 defmodule Fixtures do
 
   def spaceEmpty do
-    Tictactoe.Enums.space[:EMPTY]
+    :EMPTY
   end
 
   def randomPlayerSpace do
     x = :rand.uniform(2)
     cond do
-      x == 1 -> Tictactoe.Enums.space[:PLAYER_1]
-      x == 2 -> Tictactoe.Enums.space[:PLAYER_2]
+      x == 1 -> :PLAYER_1
+      x == 2 -> :PLAYER_2
     end
   end
 
@@ -20,7 +20,7 @@ defmodule Fixtures do
   end
 
   def emptyBoard do
-    empty = Tictactoe.Enums.space[:EMPTY]
+    empty = :EMPTY
     [empty, empty, empty,
     empty, empty, empty,
     empty, empty, empty]
@@ -32,7 +32,8 @@ defmodule Fixtures do
   end
 
   def randomEnum(enum) do
-    elem(hd(Enum.take_random(enum, 1)),1)
+    [item] = Enum.take_random(enum, 1)
+    item
   end
 end
 
@@ -52,7 +53,7 @@ defmodule Forge do
     round_setup: Forge.round_setup,
     round_state: Fixtures.randomEnum(Tictactoe.Enums.gameState),
     board: [
-      Fixtures.randomEnum(Tictactoe.Enums.space), Fixtures.randomEnum(Tictactoe.Enums.space), Fixtures.randomEnum(Tictactoe.Enums.space),
-      Fixtures.randomEnum(Tictactoe.Enums.space), Fixtures.randomEnum(Tictactoe.Enums.space), Fixtures.randomEnum(Tictactoe.Enums.space),
-      Fixtures.randomEnum(Tictactoe.Enums.space), Fixtures.randomEnum(Tictactoe.Enums.space), Fixtures.randomEnum(Tictactoe.Enums.space)]
+      Fixtures.randomEnum(Tictactoe.Enums.spaces), Fixtures.randomEnum(Tictactoe.Enums.spaces), Fixtures.randomEnum(Tictactoe.Enums.spaces),
+      Fixtures.randomEnum(Tictactoe.Enums.spaces), Fixtures.randomEnum(Tictactoe.Enums.spaces), Fixtures.randomEnum(Tictactoe.Enums.spaces),
+      Fixtures.randomEnum(Tictactoe.Enums.spaces), Fixtures.randomEnum(Tictactoe.Enums.spaces), Fixtures.randomEnum(Tictactoe.Enums.spaces)]
 end

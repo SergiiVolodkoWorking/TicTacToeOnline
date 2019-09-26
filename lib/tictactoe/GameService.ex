@@ -26,13 +26,13 @@ defmodule Tictactoe.GameService do
     game_round = mockable(GameRepository).load(game_id)
     move = %{
       space: space,
-      player: space()[:PLAYER_1]
+      player: :PLAYER_1
     }
 
     game_round = execute_move(move, game_round)
     state = game_round.round_state
     cond do
-      state == gameState()[:PLAYER_1_WON] || state == gameState()[:DRAW] -> game_round
+      state == :PLAYER_1_WON || state == :DRAW -> game_round
       true -> mockable(Bot).calculate_move(game_round) |> execute_move(game_round)
     end
   end

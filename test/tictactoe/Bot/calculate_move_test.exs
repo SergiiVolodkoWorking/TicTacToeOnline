@@ -1,5 +1,4 @@
 defmodule Tictactoe.BotTests do
-  import Tictactoe.Enums
   use ExUnit.Case
   alias Tictactoe.Bot, as: Bot
 
@@ -7,7 +6,7 @@ defmodule Tictactoe.BotTests do
     def bot_move(space) do
       %{
         space: space,
-        player: space()[:PLAYER_2]
+        player: :PLAYER_2
       }
     end
     test "when board is empty" do
@@ -18,7 +17,7 @@ defmodule Tictactoe.BotTests do
     test "when player took a space" do
       empty = Fixtures.spaceEmpty
       game_round = Forge.game_round(
-        board: [space()[:PLAYER_1], empty, empty,
+        board: [:PLAYER_1, empty, empty,
                 empty, empty, empty,
                 empty, empty, empty])
       assert Bot.calculate_move(game_round) == bot_move(1)
@@ -27,7 +26,7 @@ defmodule Tictactoe.BotTests do
     test "when player and bot took a spces" do
       empty = Fixtures.spaceEmpty
       game_round = Forge.game_round(
-        board: [space()[:PLAYER_1], space()[:PLAYER_2], empty,
+        board: [:PLAYER_1, :PLAYER_2, empty,
                 empty, empty, empty,
                 empty, empty, empty])
       assert Bot.calculate_move(game_round) == bot_move(2)

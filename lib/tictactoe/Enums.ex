@@ -1,21 +1,16 @@
 defmodule Tictactoe.Enums do
-  def space, do: %{
-    EMPTY: 0,
-    PLAYER_1: 1,
-    PLAYER_2: 2
-  }
+  def spaces do [:EMPTY, :PLAYER_1, :PLAYER_2] end
 
-  def gameState, do: %{
-    NOT_STARTED: 0,
-    PLAYER_1_MOVES: 1,
-    PLAYER_2_MOVES: 2,
-    PLAYER_1_WON: 3,
-    PLAYER_2_WON: 4,
-    DRAW: 5
-  }
+  def gameState do [
+    :NOT_STARTED,
+    :PLAYER_1_MOVES,
+    :PLAYER_2_MOVES,
+    :PLAYER_1_WON,
+    :PLAYER_2_WON,
+    :DRAW
+  ]
+  end
 
-  def playerType, do: %{
-    HUMAN: 0,
-    BOT_EASY: 1
-  }
+  def playerType do [:HUMAN, :BOT_EASY] end
+
 end
