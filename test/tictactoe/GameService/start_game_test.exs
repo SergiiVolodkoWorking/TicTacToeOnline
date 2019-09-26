@@ -9,7 +9,7 @@ defmodule Tictactoe.GameServiceTests do
   alias Tictactoe.GameService, as: Service
   alias Tictactoe.RoundSetupBuilder, as: Builder
   alias Tictactoe.GameRound, as: Round
-  alias Tictactoe.GameJsonRepository, as: Repo
+  alias Tictactoe.GameInMemoryRepository, as: Repo
 
   setup do
     mock(Builder, :init_setup, %{})

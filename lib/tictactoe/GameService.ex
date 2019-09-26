@@ -7,10 +7,11 @@ defmodule Tictactoe.GameService do
 
   alias Tictactoe.RoundSetupBuilder, as: RoundSetupBuilder
   alias Tictactoe.GameRound, as: GameRound
-  alias Tictactoe.GameJsonRepository, as: GameRepository
+  alias Tictactoe.GameInMemoryRepository, as: GameRepository
   alias Tictactoe.Bot, as: Bot
 
   def start_game(game_id) do
+    IO.inspect(game_id)
     setup = mockable(RoundSetupBuilder).init_setup()
     game_round = mockable(GameRound).start(game_id, setup)
     saved_id = mockable(GameRepository).save(game_round)

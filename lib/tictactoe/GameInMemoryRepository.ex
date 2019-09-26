@@ -1,22 +1,24 @@
 defmodule Tictactoe.GameInMemoryRepository do
-  @callback save(any ,Map) :: String
-  @callback load(any, String) :: Map
-  @callback init(any) :: any
+  @callback save(Map) :: String
+  @callback load(String) :: Map
+  @callback start_link(any) :: any
 
   use Agent
 
-  def init() do
-    {:ok, repo} = Agent.start_link(fn -> %{} end)
-    repo
+  @entityName :GameRound
+
+  def start_link(_args) do
+    Agent.start_link(fn -> %{} end, name: @entityName)
   end
 
-  def save(repo, round) do
+  def save(round) do
     id = round.game_id
-    Agent.update(repo, &Map.put(&1, id, round))
+    IO.inspect(round)
+    Agent.update(@entityName, fn state -> Map.put(state, id, round) end)
     id
   end
 
-  def load(repo, game_id) do
-    Agent.get(repo, &Map.get(&1, game_id))
+  def load(game_id) do
+    Agent.get(@entityName, fn state -> Map.get(state, game_id) end)
   end
 end

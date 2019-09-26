@@ -6,13 +6,9 @@ defmodule Tictactoe.GameInMemoryRepositoryTests do
     test "saves game in memory and loads it by id" do
       game = Forge.game_round
       id = game.game_id
-      repo = Repository.init()
 
-      # Save
-      Repository.save(repo, game)
-
-      # Load
-      assert Repository.load(repo, id) == game
+      saved_id = Repository.save(game)
+      assert Repository.load(saved_id) == game
     end
   end
 end
