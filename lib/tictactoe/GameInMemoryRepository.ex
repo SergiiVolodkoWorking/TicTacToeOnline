@@ -13,7 +13,6 @@ defmodule Tictactoe.GameInMemoryRepository do
 
   def save(round) do
     id = round.game_id
-    IO.inspect(round)
     Agent.update(@entityName, fn state -> Map.put(state, id, round) end)
     id
   end

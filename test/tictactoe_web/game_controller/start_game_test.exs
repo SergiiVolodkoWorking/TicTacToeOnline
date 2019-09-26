@@ -14,9 +14,7 @@ defmodule TictactoeWeb.GameControllerTest do
     end
 
     test "Game can check current round state", %{conn: conn} do
-      game_round = Forge.game_round(
-        game_id: 1234
-      )
+      game_round = Forge.game_round()
       game_id = Repo.save(game_round)
       expected = Jason.decode!(Jason.encode!(game_round))
 
