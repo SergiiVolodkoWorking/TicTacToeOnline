@@ -4,8 +4,6 @@ defmodule Tictactoe.GameServiceTests do
   import Mockery
   import Mockery.Assertions
 
-  import Tictactoe.Enums
-
   alias Tictactoe.GameService, as: Service
   alias Tictactoe.RoundSetupBuilder, as: Builder
   alias Tictactoe.GameRound, as: Round

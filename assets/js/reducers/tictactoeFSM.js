@@ -1,9 +1,10 @@
 
 import { GameRoundState, GameEvents } from '../actions'
 
+const empty = "EMPTY"
 const initialState = {
     gameState: GameRoundState.NOT_STARTED,
-    board: [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    board: [empty, empty, empty, empty, empty, empty, empty, empty, empty]
 }
 
 const allTransitions = [
@@ -59,18 +60,11 @@ const mapGameRound = function (gameRoundData, currentState) {
 }
 
 const mapNewState = function (game_round, transition_to) {
-
     if (!game_round.round_state) {
         return transition_to
     }
     if (transition_to == GameRoundState.PLAYER_TURN_FROM_SERVER) {
-        switch (game_round.round_state) {
-            case 1: return GameRoundState.PLAYER_1_MOVES
-            case 2: return GameRoundState.PLAYER_2_MOVES
-            case 3: return GameRoundState.PLAYER_1_WON
-            case 4: return GameRoundState.PLAYER_2_WON
-            case 5: return GameRoundState.DRAW
-        }
+        return game_round.round_state
     }
     return transition_to
 }

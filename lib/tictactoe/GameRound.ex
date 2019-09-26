@@ -2,8 +2,6 @@ defmodule Tictactoe.GameRound do
   @callback start(String, Map) :: Map
   @callback apply_move(Map, Map) :: Map
 
-  import Tictactoe.Enums
-
   def start(game_id, setup) do
     empty = :EMPTY
     %{

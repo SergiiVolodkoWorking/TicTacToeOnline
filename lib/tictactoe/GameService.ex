@@ -1,5 +1,4 @@
 defmodule Tictactoe.GameService do
-  import Tictactoe.Enums
   import Mockery.Macro
   @callback start_game(String, Map) :: Map
   @callback get_game(String, Map) :: Map

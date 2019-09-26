@@ -1,6 +1,5 @@
 defmodule TictactoeWeb.GameControllerTest do
   use TictactoeWeb.ConnCase
-  import Tictactoe.Enums
   alias Tictactoe.GameInMemoryRepository, as: Repo
 
   describe "Game round" do

@@ -5,15 +5,15 @@ import { GameRoundState } from '../actions'
 const Board = ({ gameState, gameId, board, updateRound, makeMove }) => {
     const mapSpaceSymbol = function(space) {
         switch(space){
-            case 1: return "X"
-            case 2: return "O"
+            case "PLAYER_1": return "X"
+            case "PLAYER_2": return "O"
         }
         return ""
     }
     const mapSpaceClass = function(space){
         switch(space){
-            case 1: return "grid-item players-space"
-            case 2: return "grid-item opponents-space"
+            case "PLAYER_1": return "grid-item players-space"
+            case "PLAYER_2": return "grid-item opponents-space"
         }
         return "grid-item available-space"
     }
@@ -21,10 +21,10 @@ const Board = ({ gameState, gameId, board, updateRound, makeMove }) => {
         return "space-"+index
     }
     const onMove = function(gameId, board, index){
-        if(board[index] != 0){
+        if(board[index] != "EMPTY"){
             return;
         }
-        board[index] = 1
+        board[index] = "PLAYER_1"
         makeMove(gameId, index)
     }
 

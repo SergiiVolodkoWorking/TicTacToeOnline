@@ -3,7 +3,6 @@ defmodule TictactoeWeb.GameController do
 
   action_fallback TictactoeWeb.FallbackController
   alias Tictactoe.GameService, as: GameService
-  alias Tictactoe.GameInMemoryRepository, as: Repository
 
   def create(conn, %{"game_id" => game_id}) do
     result = GameService.start_game("#{game_id}")
