@@ -1,5 +1,5 @@
 
-import { GameRoundState, GameEvents } from '../actions'
+import { GameRoundState, GameEvents, setGameId, updateGameRound, cloneCurrentGameRound } from '../actions'
 
 const empty = "EMPTY"
 const initialState = {
@@ -8,13 +8,14 @@ const initialState = {
 }
 
 const allTransitions = [
-    { event: GameEvents.START_ROUND, from: GameRoundState.NOT_STARTED, to: GameRoundState.WAITING_UPDATE },
-    { event: GameEvents.ROUND_STATE_FETCHED, from: GameRoundState.WAITING_UPDATE, to: GameRoundState.PLAYER_TURN_FROM_SERVER },
+    { event: GameEvents.START_ROUND, from: GameRoundState.NOT_STARTED, to: GameRoundState.WAITING_UPDATE, onEvent: setGameId },
+    { event: GameEvents.ROUND_STATE_FETCHED, from: GameRoundState.WAITING_UPDATE, to: GameRoundState.PLAYER_TURN_FROM_SERVER, onEvent: updateGameRound },
     { event: GameEvents.PLAYER_MOVED, from: GameRoundState.PLAYER_1_MOVES, to: GameRoundState.WAITING_UPDATE },
 
-    { event: GameEvents.START_ROUND, from: GameRoundState.PLAYER_1_WON, to: GameRoundState.WAITING_UPDATE },
-    { event: GameEvents.START_ROUND, from: GameRoundState.PLAYER_2_WON, to: GameRoundState.WAITING_UPDATE },
-    { event: GameEvents.START_ROUND, from: GameRoundState.DRAW, to: GameRoundState.WAITING_UPDATE },
+    // Will be available once issue with multiple timers is resolved
+    // { event: GameEvents.START_ROUND, from: GameRoundState.PLAYER_1_WON, to: GameRoundState.WAITING_UPDATE },
+    // { event: GameEvents.START_ROUND, from: GameRoundState.PLAYER_2_WON, to: GameRoundState.WAITING_UPDATE },
+    // { event: GameEvents.START_ROUND, from: GameRoundState.DRAW, to: GameRoundState.WAITING_UPDATE },
 ]
 
 const tictactoeFSM = function (state = initialState, action) {
@@ -29,34 +30,20 @@ const tictactoeFSM = function (state = initialState, action) {
         return state;
     }
 
-    const game_round = mapGameRound(action.game_round, state)
-    const transition_to = mapNewState(game_round, transition.to)
+    const currentGameRound = state;
+    const gameRoundFromServer = action.game_round;
+    
+    let newGameRound = currentGameRound;
+    if(transition.onEvent) {
+        newGameRound = transition.onEvent(gameRoundFromServer, currentGameRound)
+    }
+    const transition_to = mapNewState(newGameRound, transition.to)
+
     return {
         gameState: transition_to,
-        game_id: game_round.game_id,
-        board: game_round.board
+        game_id: newGameRound.game_id,
+        board: newGameRound.board
     }
-}
-
-const mapGameRound = function (gameRoundData, currentState) {
-    let gameRound = {}
-
-    if (gameRoundData.game_id) {
-        gameRound.game_id = gameRoundData.game_id
-    }
-
-    if (gameRoundData.round_state) {
-        gameRound.round_state = gameRoundData.round_state
-    }
-
-    if (gameRoundData.board) {
-        gameRound.board = gameRoundData.board
-    }
-    else {
-        gameRound.board = currentState.board
-    }
-
-    return gameRound
 }
 
 const mapNewState = function (game_round, transition_to) {

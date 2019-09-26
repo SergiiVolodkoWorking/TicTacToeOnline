@@ -15,3 +15,27 @@ export const GameEvents = Object.freeze({
   PLAYER_MOVED: 'PLAYER_MOVED',
   SHOW_RESULT: 'SHOW_RESULT'
 })
+
+
+export const setGameId = function (gameRoundFromServer, currentGameRound){
+  return {
+      game_id: gameRoundFromServer.game_id,
+      board: currentGameRound.board
+  }
+}
+
+export const updateGameRound = function (gameRoundFromServer, currentGameRound){
+  return {
+      game_id: gameRoundFromServer.game_id,
+      round_state: gameRoundFromServer.round_state,
+      board: gameRoundFromServer.board
+  }
+}
+
+export const cloneCurrentGameRound = function (currentGameRound) {
+  return {
+    game_id: currentGameRound.game_id,
+    round_state: currentGameRound.round_state,
+    board: currentGameRound.board
+  }
+}
