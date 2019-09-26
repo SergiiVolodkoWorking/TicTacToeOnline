@@ -7,7 +7,7 @@ defmodule Tictactoe.GameService do
 
   alias Tictactoe.RoundSetupBuilder, as: RoundSetupBuilder
   alias Tictactoe.GameRound, as: GameRound
-  alias Tictactoe.GameJsonRepository, as: GameRepository
+  alias Tictactoe.GameInMemoryRepository, as: GameRepository
   alias Tictactoe.Bot, as: Bot
 
   def start_game(game_id) do

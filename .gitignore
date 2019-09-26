@@ -45,3 +45,6 @@ npm-debug.log
 /test_e2e/node_modules/
 /test_e2e/cypress/snapshots/All Specs/__diff_output__
 /data
+
+/.vscode/
+/.elixir_ls/

@@ -9,9 +9,10 @@ defmodule Tictactoe.Application do
     # List all child processes to be supervised
     children = [
       # Start the endpoint when the application starts
-      TictactoeWeb.Endpoint
+      TictactoeWeb.Endpoint,
       # Starts a worker by calling: Tictactoe.Worker.start_link(arg)
       # {Tictactoe.Worker, arg},
+      Tictactoe.GameInMemoryRepository
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html

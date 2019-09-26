@@ -1,7 +1,7 @@
 defmodule TictactoeWeb.GameControllerTest do
   use TictactoeWeb.ConnCase
   import Tictactoe.Enums
-  alias Tictactoe.GameJsonRepository, as: Repo
+  alias Tictactoe.GameInMemoryRepository, as: Repo
 
   describe "Game round" do
     test "Player can start the round", %{conn: conn} do
@@ -14,7 +14,7 @@ defmodule TictactoeWeb.GameControllerTest do
     end
 
     test "Game can check current round state", %{conn: conn} do
-      game_round = Forge.game_round
+      game_round = Forge.game_round()
       game_id = Repo.save(game_round)
       expected = Jason.decode!(Jason.encode!(game_round))
 
