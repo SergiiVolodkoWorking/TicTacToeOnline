@@ -21,7 +21,7 @@ const Board = ({ gameState, gameId, board, updateRound, makeMove }) => {
         return "space-"+index
     }
     const onMove = function(gameId, board, index){
-        if(board[index] != "EMPTY"){
+        if(board[index] !== "EMPTY"){
             return;
         }
         board[index] = "PLAYER_1"
@@ -33,7 +33,7 @@ const Board = ({ gameState, gameId, board, updateRound, makeMove }) => {
         , 1000);
 
     const isHintToDisplay = gameState != GameRoundState.NOT_STARTED
-    const MoveInfo = () => (<h3>Click empty cell to make your move</h3>)
+    const MoveInfo = () => (<h3 className='board-hint'>Click empty cell to make your move</h3>)
     const spaces = board.map((space, index) => 
         <div id={mapSpaceId(index)} key={index} className={mapSpaceClass(space)} 
             onClick={() => onMove(gameId, board, index)}>
