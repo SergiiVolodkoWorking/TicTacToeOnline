@@ -39,9 +39,10 @@ end
 
 defmodule Forge do
   use Blacksmith
+  alias Tictactoe.Enums, as: Enums
 
   register :player,
-    type: Fixtures.randomEnum(Tictactoe.Enums.playerType),
+    type: Fixtures.randomEnum(Enums.playerType),
     symbol: Fixtures.randomSymbol()
 
   register :round_setup,
@@ -51,9 +52,25 @@ defmodule Forge do
   register :game_round,
     game_id: Faker.UUID.v4,
     round_setup: Forge.round_setup,
-    round_state: Fixtures.randomEnum(Tictactoe.Enums.gameState),
+    round_state: Fixtures.randomEnum(Enums.gameState),
     board: [
-      Fixtures.randomEnum(Tictactoe.Enums.spaces), Fixtures.randomEnum(Tictactoe.Enums.spaces), Fixtures.randomEnum(Tictactoe.Enums.spaces),
-      Fixtures.randomEnum(Tictactoe.Enums.spaces), Fixtures.randomEnum(Tictactoe.Enums.spaces), Fixtures.randomEnum(Tictactoe.Enums.spaces),
-      Fixtures.randomEnum(Tictactoe.Enums.spaces), Fixtures.randomEnum(Tictactoe.Enums.spaces), Fixtures.randomEnum(Tictactoe.Enums.spaces)]
+      Fixtures.randomEnum(Enums.spaces), Fixtures.randomEnum(Enums.spaces), Fixtures.randomEnum(Enums.spaces),
+      Fixtures.randomEnum(Enums.spaces), Fixtures.randomEnum(Enums.spaces), Fixtures.randomEnum(Enums.spaces),
+      Fixtures.randomEnum(Enums.spaces), Fixtures.randomEnum(Enums.spaces), Fixtures.randomEnum(Enums.spaces)]
+end
+
+defmodule Tictactoe.Enums do
+  def spaces do [:EMPTY, :PLAYER_1, :PLAYER_2] end
+
+  def gameState do [
+    :NOT_STARTED,
+    :PLAYER_1_MOVES,
+    :PLAYER_2_MOVES,
+    :PLAYER_1_WON,
+    :PLAYER_2_WON,
+    :DRAW
+  ]
+  end
+
+  def playerType do [:HUMAN, :BOT_EASY] end
 end

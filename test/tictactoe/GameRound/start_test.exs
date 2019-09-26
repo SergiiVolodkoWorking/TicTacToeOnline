@@ -91,10 +91,10 @@ defmodule Tictactoe.GameRoundTests do
       game_round = Forge.game_round(
                       round_state: playerMovesState(player),
                       board: [player, player, opponent,
-                              opponent, player, opponent,
-                              player, opponent, empty])
+                              opponent, player, empty,
+                              player, opponent, opponent])
       move = %{
-        space: 8,
+        space: 5,
         player: player
       }
      actual = GameRound.apply_move(game_round, move)

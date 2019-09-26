@@ -1,5 +1,5 @@
 
-import { GameRoundState, GameEvents, setGameId, updateGameRound, cloneCurrentGameRound } from '../actions'
+import { GameRoundState, GameEvents, setGameId, updateGameRound } from '../actions'
 
 const empty = "EMPTY"
 const initialState = {

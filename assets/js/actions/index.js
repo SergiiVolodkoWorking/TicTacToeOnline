@@ -24,18 +24,10 @@ export const setGameId = function (gameRoundFromServer, currentGameRound){
   }
 }
 
-export const updateGameRound = function (gameRoundFromServer, currentGameRound){
+export const updateGameRound = function (gameRoundFromServer){
   return {
       game_id: gameRoundFromServer.game_id,
       round_state: gameRoundFromServer.round_state,
       board: gameRoundFromServer.board
-  }
-}
-
-export const cloneCurrentGameRound = function (currentGameRound) {
-  return {
-    game_id: currentGameRound.game_id,
-    round_state: currentGameRound.round_state,
-    board: currentGameRound.board
   }
 }
