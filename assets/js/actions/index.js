@@ -15,14 +15,3 @@ export const GameEvents = Object.freeze({
   PLAYER_MOVED: 'PLAYER_MOVED',
   SHOW_RESULT: 'SHOW_RESULT'
 })
-
-export const transitToNewGameRound = function (gameRoundFromServer, transition_to) {
-  if (transition_to === GameRoundState.PLAYER_TURN_FROM_SERVER) {
-    transition_to = gameRoundFromServer.round_state
-  }
-  return {
-      game_id: gameRoundFromServer.game_id,
-      board: gameRoundFromServer.board,
-      gameState: transition_to
-  }
-}

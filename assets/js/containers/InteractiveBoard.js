@@ -1,20 +1,15 @@
 import { connect } from 'react-redux'
 import { GameEvents } from '../actions'
 import Board from '../components/Board'
-import { makeGetRequest, makePutRequest } from '../api'
+import { makePutRequest } from '../api'
 
 const mapStateToProps = state => ({
-  gameState: state.tictactoeFSM.gameState,
+  gameState: state.tictactoeFSM.round_state,
   gameId: state.tictactoeFSM.game_id,
   board: state.tictactoeFSM.board
 })
 
 const mapDispatchToProps = dispatch => ({
-  updateRound: game_id => {
-    makeGetRequest( 
-      'api/game/' + game_id,
-      data => dispatch({ type: GameEvents.ROUND_STATE_FETCHED, game_round: data }))
-  },
   makeMove: (game_id, space) => {
     const url = 'api/make_move/' + game_id
     const body = {

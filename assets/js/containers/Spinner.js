@@ -20,8 +20,7 @@ Spinner.propTypes = {
     gameState: PropTypes.string.isRequired
 }
 
-const mapStateToProps = state => (
-    { gameState: state.tictactoeFSM.gameState })
+const mapStateToProps = state => ({ gameState: state.tictactoeFSM.round_state })
 
 export default connect(
     mapStateToProps,
