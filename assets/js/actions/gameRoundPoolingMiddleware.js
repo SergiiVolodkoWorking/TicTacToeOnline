@@ -3,7 +3,7 @@ import { GameRoundState, GameEvents } from '.'
 
 let interval = null;
 
-export const gameRoundPoolingMiddleware = function(store) {
+export const gameRoundPoolingMiddleware = function (store) {
     // Called when calling applyMiddleware so
     // our middleware can have access to the store
 
@@ -12,7 +12,7 @@ export const gameRoundPoolingMiddleware = function(store) {
 
         if (currentRoundState === GameRoundState.WAITING_UPDATE) {
             const game_id = store.getState().tictactoeFSM.game_id;
-            makeGetRequest( 
+            makeGetRequest(
                 'api/game/' + game_id,
                 data => store.dispatch({ type: GameEvents.ROUND_STATE_FETCHED, game_round: data })
             );

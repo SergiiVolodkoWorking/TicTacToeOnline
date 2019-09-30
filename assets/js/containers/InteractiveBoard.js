@@ -20,7 +20,7 @@ const mapDispatchToProps = dispatch => ({
       url,
       body,
       data => dispatch({ type: GameEvents.PLAYER_MOVED, game_round: data }))
-    }
+  }
 })
 
 export default connect(

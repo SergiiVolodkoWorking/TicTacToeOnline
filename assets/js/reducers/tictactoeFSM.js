@@ -13,31 +13,31 @@ const tictactoeFSM = function (state = initialState, action) {
     const currentState = state.round_state;
     const gameRoundFromServer = action.game_round;
 
-    switch(true) {
+    switch (true) {
 
-        case event == GameEvents.START_ROUND && 
+        case event == GameEvents.START_ROUND &&
             currentState == GameRoundState.NOT_STARTED:
-                return {
-                    round_state: GameRoundState.WAITING_UPDATE, 
-                    game_id: gameRoundFromServer.game_id,
-                    board: gameRoundFromServer.board
-                }
+            return {
+                round_state: GameRoundState.WAITING_UPDATE,
+                game_id: gameRoundFromServer.game_id,
+                board: gameRoundFromServer.board
+            }
 
         case event == GameEvents.ROUND_STATE_FETCHED &&
             currentState == GameRoundState.WAITING_UPDATE:
-                return {
-                    round_state: gameRoundFromServer.round_state, 
-                    game_id: gameRoundFromServer.game_id,
-                    board: gameRoundFromServer.board
-                }
+            return {
+                round_state: gameRoundFromServer.round_state,
+                game_id: gameRoundFromServer.game_id,
+                board: gameRoundFromServer.board
+            }
 
         case event == GameEvents.PLAYER_MOVED &&
             currentState == GameRoundState.PLAYER_1_MOVES:
-                return {
-                    round_state: GameRoundState.WAITING_UPDATE, 
-                    game_id: gameRoundFromServer.game_id,
-                    board: currentGameRound.board
-                }
+            return {
+                round_state: GameRoundState.WAITING_UPDATE,
+                game_id: gameRoundFromServer.game_id,
+                board: currentGameRound.board
+            }
 
         default: return currentGameRound;
 
