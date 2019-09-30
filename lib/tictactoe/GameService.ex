@@ -14,7 +14,10 @@ defmodule Tictactoe.GameService do
     game_round = mockable(GameRound).start(game_id, setup)
     saved_id = mockable(GameRepository).save(game_round)
 
-    %{game_id: saved_id}
+    %{
+      game_id: saved_id,
+      board: game_round.board
+    }
   end
 
   def get_game(game_id) do

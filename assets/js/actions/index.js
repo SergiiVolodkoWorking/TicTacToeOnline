@@ -16,18 +16,13 @@ export const GameEvents = Object.freeze({
   SHOW_RESULT: 'SHOW_RESULT'
 })
 
-
-export const setGameId = function (gameRoundFromServer, currentGameRound){
-  return {
-      game_id: gameRoundFromServer.game_id,
-      board: currentGameRound.board
+export const transitToNewGameRound = function (gameRoundFromServer, transition_to) {
+  if (transition_to === GameRoundState.PLAYER_TURN_FROM_SERVER) {
+    transition_to = gameRoundFromServer.round_state
   }
-}
-
-export const updateGameRound = function (gameRoundFromServer){
   return {
       game_id: gameRoundFromServer.game_id,
-      round_state: gameRoundFromServer.round_state,
-      board: gameRoundFromServer.board
+      board: gameRoundFromServer.board,
+      gameState: transition_to
   }
 }

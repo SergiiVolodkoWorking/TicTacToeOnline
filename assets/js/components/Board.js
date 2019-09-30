@@ -2,51 +2,66 @@ import * as React from 'react'
 import PropTypes from 'prop-types'
 import { GameRoundState } from '../actions'
 
-const Board = ({ gameState, gameId, board, updateRound, makeMove }) => {
-    const mapSpaceSymbol = function(space) {
-        switch(space){
+class Board extends React.Component {
+    
+    startInterval(updateRound){
+        this.interval = setInterval(() => {
+            console.log("Update? ", this.props.gameState)
+            if(this.props.gameState === GameRoundState.WAITING_UPDATE) {updateRound(this.props.gameId); this.forceUpdate()}}
+            , 1000);
+    }
+
+    mapSpaceSymbol(space) {
+        switch(space) {
             case "PLAYER_1": return "X"
             case "PLAYER_2": return "O"
         }
         return ""
     }
-    const mapSpaceClass = function(space){
-        switch(space){
+    mapSpaceClass(space) {
+        switch(space) {
             case "PLAYER_1": return "grid-item players-space"
             case "PLAYER_2": return "grid-item opponents-space"
         }
         return "grid-item available-space"
     }
-    const mapSpaceId = function(index){
+
+    mapSpaceId(index) {
         return "space-"+index
     }
-    const onMove = function(gameId, board, index){
-        if(board[index] !== "EMPTY"){
-            return;
+
+    render() {
+        const { gameState, gameId, board, updateRound, makeMove } = this.props
+
+        if(!this.interval) {
+            console.log("inits")
+            this.startInterval(updateRound);
         }
-        board[index] = "PLAYER_1"
-        makeMove(gameId, index)
+
+        const onMove = function(gameId, board, index, makeMove) {
+            if(board[index] !== "EMPTY") {
+                return;
+            }
+            board[index] = "PLAYER_1";
+            makeMove(gameId, index);
+        }
+
+        const isHintToDisplay = gameState != GameRoundState.NOT_STARTED
+        const MoveInfo = () => (<h3 className='board-hint'>Click empty cell to make your move</h3>)
+        const spaces = board.map((space, index) => 
+            <div id={this.mapSpaceId(index)} key={index} className={this.mapSpaceClass(space)} 
+                onClick={() => onMove(gameId, board, index, makeMove)}>
+                <div className="space-symbol">{this.mapSpaceSymbol(space)}</div>
+            </div>)
+
+        return (
+            <div className="">
+                {isHintToDisplay && <MoveInfo />}
+                <div className="grid-container">
+                    {spaces}
+                </div>
+            </div>)
     }
-
-    setInterval(() => {
-        if(gameState == GameRoundState.WAITING_UPDATE) updateRound(gameId)}
-        , 1000);
-
-    const isHintToDisplay = gameState != GameRoundState.NOT_STARTED
-    const MoveInfo = () => (<h3 className='board-hint'>Click empty cell to make your move</h3>)
-    const spaces = board.map((space, index) => 
-        <div id={mapSpaceId(index)} key={index} className={mapSpaceClass(space)} 
-            onClick={() => onMove(gameId, board, index)}>
-            <div className="space-symbol">{mapSpaceSymbol(space)}</div>
-        </div>)
-
-    return (
-        <div className="">
-            {isHintToDisplay && <MoveInfo />}
-            <div className="grid-container">
-                {spaces}
-            </div>
-        </div>)
 }
 
 Board.propTypes = {

@@ -1,5 +1,5 @@
 
-import { GameRoundState, GameEvents, setGameId, updateGameRound } from '../actions'
+import { GameRoundState, GameEvents, transitToNewGameRound } from '../actions'
 
 const empty = "EMPTY"
 const initialState = {
@@ -8,9 +8,9 @@ const initialState = {
 }
 
 const allTransitions = [
-    { event: GameEvents.START_ROUND, from: GameRoundState.NOT_STARTED, to: GameRoundState.WAITING_UPDATE, onEvent: setGameId },
-    { event: GameEvents.ROUND_STATE_FETCHED, from: GameRoundState.WAITING_UPDATE, to: GameRoundState.PLAYER_TURN_FROM_SERVER, onEvent: updateGameRound },
-    { event: GameEvents.PLAYER_MOVED, from: GameRoundState.PLAYER_1_MOVES, to: GameRoundState.WAITING_UPDATE },
+    { event: GameEvents.START_ROUND,         from: GameRoundState.NOT_STARTED,    to: GameRoundState.WAITING_UPDATE,          aggregateGameRound: transitToNewGameRound },
+    { event: GameEvents.ROUND_STATE_FETCHED, from: GameRoundState.WAITING_UPDATE, to: GameRoundState.PLAYER_TURN_FROM_SERVER, aggregateGameRound: transitToNewGameRound },
+    { event: GameEvents.PLAYER_MOVED,        from: GameRoundState.PLAYER_1_MOVES, to: GameRoundState.WAITING_UPDATE },
 
     // Will be available once issue with multiple timers is resolved
     // { event: GameEvents.START_ROUND, from: GameRoundState.PLAYER_1_WON, to: GameRoundState.WAITING_UPDATE },
@@ -19,6 +19,7 @@ const allTransitions = [
 ]
 
 const tictactoeFSM = function (state = initialState, action) {
+    console.log(action)
     const event = action.type
     const currentState = state.gameState;
 
@@ -26,34 +27,20 @@ const tictactoeFSM = function (state = initialState, action) {
         return t.event === event &&
             t.from === currentState;
     });
-    if (!transition) {
-        return state;
-    }
 
     const currentGameRound = state;
+    console.log("Current", currentGameRound)
+    if (!transition) {
+        return currentGameRound;
+    }
     const gameRoundFromServer = action.game_round;
-    
+
     let newGameRound = currentGameRound;
-    if(transition.onEvent) {
-        newGameRound = transition.onEvent(gameRoundFromServer, currentGameRound)
+    if(transition.aggregateGameRound) {
+        newGameRound = transition.aggregateGameRound(gameRoundFromServer, transition.to)
     }
-    const transition_to = mapNewState(newGameRound, transition.to)
-
-    return {
-        gameState: transition_to,
-        game_id: newGameRound.game_id,
-        board: newGameRound.board
-    }
-}
-
-const mapNewState = function (game_round, transition_to) {
-    if (!game_round.round_state) {
-        return transition_to
-    }
-    if (transition_to == GameRoundState.PLAYER_TURN_FROM_SERVER) {
-        return game_round.round_state
-    }
-    return transition_to
+    console.log("New", newGameRound)
+    return newGameRound;
 }
 
 export default tictactoeFSM
