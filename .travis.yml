@@ -1,11 +1,24 @@
 language: elixir
+
 elixir:
 - 1.9.1
+
 otp_release:
 - 21.3
+
 dist: xenial
+
+before_script:
+- npm --prefix assets install
+- sudo apt-get install libgconf-2-4
+- npm --prefix test_e2e install
+
 script:
 - mix test
+- mix phx.server > /dev/null &
+- npx wait-on http://localhost:4000/
+- npx cypress run --project ./test_e2e
+
 deploy:
   provider: heroku
   app: tictactoe-elixir-online
