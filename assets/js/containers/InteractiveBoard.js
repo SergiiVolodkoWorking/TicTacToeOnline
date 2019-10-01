@@ -4,22 +4,22 @@ import Board from '../components/Board'
 import { makePutRequest } from '../api'
 
 const mapStateToProps = state => ({
-  gameState: state.tictactoeFSM.round_state,
-  gameId: state.tictactoeFSM.game_id,
+  roundState: state.tictactoeFSM.roundState,
+  gameId: state.tictactoeFSM.gameId,
   board: state.tictactoeFSM.board
 })
 
 const mapDispatchToProps = dispatch => ({
-  makeMove: (game_id, space) => {
-    const url = 'api/make_move/' + game_id
+  makeMove: (gameId, space) => {
+    const url = 'api/make_move/' + gameId
     const body = {
-      game_id: game_id,
+      game_id: gameId,
       taken_space: space
     }
     makePutRequest(
       url,
       body,
-      data => dispatch({ type: GameEvents.PLAYER_MOVED, game_round: data }))
+      data => dispatch({ type: GameEvents.PLAYER_MOVED, gameRound: data }))
   }
 })
 

@@ -5,7 +5,7 @@ import GameMenu from '../components/GameMenu'
 import { makePostRequest } from '../api'
 
 const mapStateToProps = state => ({
-  gameState: state.tictactoeFSM.round_state
+  roundState: state.tictactoeFSM.roundState
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -14,7 +14,7 @@ const mapDispatchToProps = dispatch => ({
     makePostRequest(
       'api/start_game',
       body,
-      data => dispatch({ type: GameEvents.START_ROUND, game_round: data }))
+      data => dispatch({ type: GameEvents.START_ROUND, gameRound: data }))
   }
 })
 

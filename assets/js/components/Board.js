@@ -2,7 +2,7 @@ import * as React from 'react'
 import PropTypes from 'prop-types'
 import { GameRoundState } from '../actions'
 
-const Board = ({ gameState, gameId, board, makeMove }) => {
+const Board = ({ roundState, gameId, board, makeMove }) => {
     const mapSpaceSymbol = function (space) {
         switch (space) {
             case "PLAYER_1": return "X"
@@ -31,7 +31,7 @@ const Board = ({ gameState, gameId, board, makeMove }) => {
         makeMove(gameId, index)
     }
 
-    const isHintToDisplay = gameState != GameRoundState.NOT_STARTED
+    const isHintToDisplay = roundState != GameRoundState.NOT_STARTED
     const MoveInfo = () => (<h3 className="board-hint">Click empty cell to make your move</h3>)
 
     const spaces = board.map((space, index) =>
@@ -50,7 +50,7 @@ const Board = ({ gameState, gameId, board, makeMove }) => {
 }
 
 Board.propTypes = {
-    gameState: PropTypes.string.isRequired,
+    roundState: PropTypes.string.isRequired,
     gameId: PropTypes.any,
     board: PropTypes.array,
     makeMove: PropTypes.func.isRequired

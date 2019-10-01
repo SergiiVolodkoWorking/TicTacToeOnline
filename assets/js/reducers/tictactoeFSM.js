@@ -3,39 +3,39 @@ import { GameRoundState, GameEvents } from '../actions'
 
 const empty = "EMPTY"
 const initialState = {
-    round_state: GameRoundState.NOT_STARTED,
+    roundState: GameRoundState.NOT_STARTED,
     board: [empty, empty, empty, empty, empty, empty, empty, empty, empty]
 }
 
 const tictactoeFSM = function (state = initialState, action) {
     const event = action.type;
     const currentGameRound = state;
-    const currentState = state.round_state;
-    const gameRoundFromServer = action.game_round;
+    const currentState = state.roundState;
+    const gameRoundFromServer = action.gameRound;
 
     switch (true) {
 
-        case event == GameEvents.START_ROUND &&
-            currentState == GameRoundState.NOT_STARTED:
+        case event === GameEvents.START_ROUND &&
+            currentState === GameRoundState.NOT_STARTED:
             return {
-                round_state: GameRoundState.WAITING_UPDATE,
-                game_id: gameRoundFromServer.game_id,
+                roundState: GameRoundState.WAITING_UPDATE,
+                gameId: gameRoundFromServer.game_id,
                 board: gameRoundFromServer.board
             }
 
-        case event == GameEvents.ROUND_STATE_FETCHED &&
-            currentState == GameRoundState.WAITING_UPDATE:
+        case event === GameEvents.ROUND_STATE_FETCHED &&
+            currentState === GameRoundState.WAITING_UPDATE:
             return {
-                round_state: gameRoundFromServer.round_state,
-                game_id: gameRoundFromServer.game_id,
+                roundState: gameRoundFromServer.round_state,
+                gameId: gameRoundFromServer.game_id,
                 board: gameRoundFromServer.board
             }
 
-        case event == GameEvents.PLAYER_MOVED &&
-            currentState == GameRoundState.PLAYER_1_MOVES:
+        case event === GameEvents.PLAYER_MOVED &&
+            currentState === GameRoundState.PLAYER_1_MOVES:
             return {
-                round_state: GameRoundState.WAITING_UPDATE,
-                game_id: gameRoundFromServer.game_id,
+                roundState: GameRoundState.WAITING_UPDATE,
+                gameId: gameRoundFromServer.game_id,
                 board: currentGameRound.board
             }
 

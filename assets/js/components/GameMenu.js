@@ -2,19 +2,19 @@ import * as React from 'react'
 import PropTypes from 'prop-types'
 import { GameRoundState } from '../actions'
 
-const GameMenu = ({ gameState, startGame }) => {
+const GameMenu = ({ roundState, startGame }) => {
     const isGameEnded =
         [GameRoundState.PLAYER_1_WON, GameRoundState.PLAYER_2_WON, GameRoundState.DRAW]
-            .includes(gameState)
+            .includes(roundState)
     const isMenuVisible =
-        isGameEnded || gameState == GameRoundState.NOT_STARTED
+        isGameEnded || roundState == GameRoundState.NOT_STARTED
 
     if (!isMenuVisible) {
         return (null)
     }
     let menuTitle = 'Menu'
     let cardStyle = 'card large '
-    switch (gameState) {
+    switch (roundState) {
         case GameRoundState.PLAYER_1_WON: {
             menuTitle = 'Victory !';
             cardStyle += 'menu-victory';
@@ -52,7 +52,7 @@ const GameMenu = ({ gameState, startGame }) => {
 }
 
 GameMenu.propTypes = {
-    gameState: PropTypes.string.isRequired,
+    roundState: PropTypes.string.isRequired,
     startGame: PropTypes.func.isRequired
 }
 

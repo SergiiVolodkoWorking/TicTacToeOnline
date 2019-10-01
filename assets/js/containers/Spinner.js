@@ -3,8 +3,8 @@ import PropTypes from 'prop-types'
 import { GameRoundState } from '../actions'
 import { connect } from 'react-redux'
 
-const Spinner = ({ gameState }) => {
-    const isLoading = gameState == GameRoundState.WAITING_UPDATE
+const Spinner = ({ roundState }) => {
+    const isLoading = roundState == GameRoundState.WAITING_UPDATE
     if (!isLoading) {
         return (null)
     }
@@ -17,10 +17,10 @@ const Spinner = ({ gameState }) => {
 }
 
 Spinner.propTypes = {
-    gameState: PropTypes.string.isRequired
+    roundState: PropTypes.string.isRequired
 }
 
-const mapStateToProps = state => ({ gameState: state.tictactoeFSM.round_state })
+const mapStateToProps = state => ({ roundState: state.tictactoeFSM.roundState })
 
 export default connect(
     mapStateToProps,
