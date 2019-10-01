@@ -11,9 +11,9 @@ dist: xenial
 script:
 - mix test
 
-# deploy:
-#   provider: heroku
-#   app: TicTacToeOnline
-#   on: master
-#   api_key:
-#     secure:
+deploy:
+  provider: heroku
+  app: TicTacToeOnline
+  on: ci-cd-implementation
+  api_key:
+    secure: "F4gsg7F6varH9VODVFIoaQKQUkRM9Ez4CZ+fjd/iKinGPFRjLdJ4Z18tWH7X6KSPuFC4XXI2JF+v1BFuwHjsEq8b9TAdAjnDmOdrH8ehhZczeuP3D/KY+49k0am5B0+o5V8W5aPWDiItRT8q2IHIR3dpzjklwAS5QvH377cA6Wx5kFVq5/B4xWKzi1s/Q0VTVm5G6lhmQkeKZpp0iuIvqgqGWzqNpnTPMkv5BU5PY1w9nAVAqDJPQVMsHlhQgj1GoyM+HucAKTombSasb1pyBCjgKKTuI2yFBfdMX+Z/GjKqHmfzdh3XczYyi/EKaEhh8YvQcxqFDC+MFXdyl8OGM4fZ33IATejL35GHyr1pXq2AKw8bGw4JUclbQczfzAri1CSpgkgusuyUCp76yA1kaGUfNdpyYbhWAsOym8X16PBliDD+OmWkS8gmyOa2rNe6OaNl4FV5iS8QahUiSmz17NsQNQSQzw87lt5sCaY/qaUEQYT1W02xK1j1+H2+upyYx09gA/HizlbZJLYyk2Zp0nflfiE5HqeJyl0zLMYq20q0iDJjR2jgObPHDyjR2vwG4GNaurtPaZyftVv9OaYqf6p4jvmR+Q/UHZr1YpLyPADqHAAJXuzp/wP7DfSm4OX61o/WfFD2QADyN+D0GsJ3zj2G87n+l6Ox66d2Fh3Qvkc="
