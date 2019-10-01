@@ -1,6 +1,5 @@
 defmodule TictactoeWeb.GameControllerTest do
   use TictactoeWeb.ConnCase
-  import Tictactoe.Enums
   alias Tictactoe.GameInMemoryRepository, as: Repo
 
   describe "Game round" do
@@ -28,10 +27,10 @@ defmodule TictactoeWeb.GameControllerTest do
   describe "Player makes move against bot (PUT /api/make_move)" do
     test "their winning move ends the game", %{conn: conn} do
       empty = Fixtures.spaceEmpty
-      player1 = space()[:PLAYER_1]
+      player1 = :PLAYER_1
       game_round = Forge.game_round(
         game_id: "test-make-move",
-        round_state: gameState()[:PLAYER_1_MOVES],
+        round_state: :PLAYER_1_MOVES,
         board: [player1, player1, empty,
                 empty, empty, empty,
                 empty, empty, empty])
@@ -44,7 +43,7 @@ defmodule TictactoeWeb.GameControllerTest do
       json_response(conn, 200)
       actual = Repo.load(game_id)
 
-      assert actual.round_state == gameState()[:PLAYER_1_WON]
+      assert actual.round_state == :PLAYER_1_WON
       assert actual.board == [player1, player1, player1,
                               empty, empty, empty,
                               empty, empty, empty]
@@ -52,10 +51,10 @@ defmodule TictactoeWeb.GameControllerTest do
 
     test "their draw move ends the game", %{conn: conn} do
       empty = Fixtures.spaceEmpty
-      player1 = space()[:PLAYER_1]
-      player2 = space()[:PLAYER_2]
+      player1 = :PLAYER_1
+      player2 = :PLAYER_2
       game_round = Forge.game_round(
-        round_state: gameState()[:PLAYER_1_MOVES],
+        round_state: :PLAYER_1_MOVES,
         board: [player1, player2, player2,
                 player2, player1, player1,
                 player1, empty, player2])
@@ -68,7 +67,7 @@ defmodule TictactoeWeb.GameControllerTest do
       json_response(conn, 200)
       actual = Repo.load(game_id)
 
-      assert actual.round_state == gameState()[:DRAW]
+      assert actual.round_state == :DRAW
       assert actual.board == [player1, player2, player2,
                               player2, player1, player1,
                               player1, player1, player2]
@@ -76,10 +75,10 @@ defmodule TictactoeWeb.GameControllerTest do
 
     test "their move doesn't end the game and bot wins", %{conn: conn} do
       empty = Fixtures.spaceEmpty
-      player1 = space()[:PLAYER_1]
-      player2 = space()[:PLAYER_2]
+      player1 = :PLAYER_1
+      player2 = :PLAYER_2
       game_round = Forge.game_round(
-        round_state: gameState()[:PLAYER_1_MOVES],
+        round_state: :PLAYER_1_MOVES,
         board: [player2, player2, empty,
                 player1, empty, empty,
                 empty, empty, empty])
@@ -92,7 +91,7 @@ defmodule TictactoeWeb.GameControllerTest do
       json_response(conn, 200)
       actual = Repo.load(game_id)
 
-      assert actual.round_state == gameState()[:PLAYER_2_WON]
+      assert actual.round_state == :PLAYER_2_WON
       assert actual.board == [player2, player2, player2,
                               player1, player1, empty,
                               empty, empty, empty]
@@ -100,10 +99,10 @@ defmodule TictactoeWeb.GameControllerTest do
 
     test "their move doesn't end the game but bot's makes draw", %{conn: conn} do
       empty = Fixtures.spaceEmpty
-      player1 = space()[:PLAYER_1]
-      player2 = space()[:PLAYER_2]
+      player1 = :PLAYER_1
+      player2 = :PLAYER_2
       game_round = Forge.game_round(
-        round_state: gameState()[:PLAYER_1_MOVES],
+        round_state: :PLAYER_1_MOVES,
         board: [player1, player2, player2,
                 player2, player1, player1,
                 player1, empty, empty])
@@ -116,7 +115,7 @@ defmodule TictactoeWeb.GameControllerTest do
       json_response(conn, 200)
       actual = Repo.load(game_id)
 
-      assert actual.round_state == gameState()[:DRAW]
+      assert actual.round_state == :DRAW
       assert actual.board == [player1, player2, player2,
                               player2, player1, player1,
                               player1, player1, player2]
@@ -124,10 +123,10 @@ defmodule TictactoeWeb.GameControllerTest do
 
     test "their move doesn't end the game and bot's move doesn't end it", %{conn: conn} do
       empty = Fixtures.spaceEmpty
-      player1 = space()[:PLAYER_1]
-      player2 = space()[:PLAYER_2]
+      player1 = :PLAYER_1
+      player2 = :PLAYER_2
       game_round = Forge.game_round(
-        round_state: gameState()[:PLAYER_1_MOVES],
+        round_state: :PLAYER_1_MOVES,
         board: [player2, empty, empty,
                 player1, empty, empty,
                 empty, empty, empty])
@@ -140,7 +139,7 @@ defmodule TictactoeWeb.GameControllerTest do
       json_response(conn, 200)
       actual = Repo.load(game_id)
 
-      assert actual.round_state == gameState()[:PLAYER_1_MOVES]
+      assert actual.round_state == :PLAYER_1_MOVES
       assert actual.board == [player2, player2, empty,
                               player1, player1, empty,
                               empty, empty, empty]

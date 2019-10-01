@@ -1,5 +1,4 @@
 defmodule Tictactoe.GameService do
-  import Tictactoe.Enums
   import Mockery.Macro
   @callback start_game(String, Map) :: Map
   @callback get_game(String, Map) :: Map
@@ -15,7 +14,10 @@ defmodule Tictactoe.GameService do
     game_round = mockable(GameRound).start(game_id, setup)
     saved_id = mockable(GameRepository).save(game_round)
 
-    %{game_id: saved_id}
+    %{
+      game_id: saved_id,
+      board: game_round.board
+    }
   end
 
   def get_game(game_id) do
@@ -26,13 +28,13 @@ defmodule Tictactoe.GameService do
     game_round = mockable(GameRepository).load(game_id)
     move = %{
       space: space,
-      player: space()[:PLAYER_1]
+      player: :PLAYER_1
     }
 
     game_round = execute_move(move, game_round)
     state = game_round.round_state
     cond do
-      state == gameState()[:PLAYER_1_WON] || state == gameState()[:DRAW] -> game_round
+      state == :PLAYER_1_WON || state == :DRAW -> game_round
       true -> mockable(Bot).calculate_move(game_round) |> execute_move(game_round)
     end
   end

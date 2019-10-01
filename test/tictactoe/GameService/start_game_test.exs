@@ -4,8 +4,6 @@ defmodule Tictactoe.GameServiceTests do
   import Mockery
   import Mockery.Assertions
 
-  import Tictactoe.Enums
-
   alias Tictactoe.GameService, as: Service
   alias Tictactoe.RoundSetupBuilder, as: Builder
   alias Tictactoe.GameRound, as: Round
@@ -55,7 +53,7 @@ defmodule Tictactoe.GameServiceTests do
       round = Forge.game_round()
 
       victory_round = Forge.game_round(
-        round_state: gameState()[:PLAYER_1_WON])
+        round_state: :PLAYER_1_WON)
 
       mock(Repo, :load, round)
       mock(Round, [apply_move: 2], fn(input_round, _) ->
@@ -75,7 +73,7 @@ defmodule Tictactoe.GameServiceTests do
       round = Forge.game_round()
 
       draw_round = Forge.game_round(
-        round_state: gameState()[:DRAW])
+        round_state: :DRAW)
 
       mock(Repo, :load, round)
       mock(Round, [apply_move: 2], fn(input_round, _) ->
@@ -94,7 +92,7 @@ defmodule Tictactoe.GameServiceTests do
     test "their move doesn't end the game returns round result after bot" do
       round = Forge.game_round()
       round_after_player = Forge.game_round(
-        round_state: gameState()[:PLAYER_2_MOVES])
+        round_state: :PLAYER_2_MOVES)
       round_after_bot = Forge.game_round()
 
       mock(Repo, :load, round)

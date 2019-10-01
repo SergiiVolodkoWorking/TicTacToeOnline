@@ -1,11 +1,10 @@
 defmodule Tictactoe.GameRoundTests do
   use ExUnit.Case
-  import Tictactoe.Enums
   alias Tictactoe.GameRound, as: GameRound
 
   describe "when game round start is called" do
     test "initial game state is returned" do
-      statePlayer1Moves = gameState()[:PLAYER_1_MOVES]
+      statePlayer1Moves = :PLAYER_1_MOVES
       game_id = "test-id"
       setup = Forge.round_setup
 
@@ -44,9 +43,9 @@ defmodule Tictactoe.GameRoundTests do
     end
 
     test "if player 1 finishes line victory goes to player 1" do
-      statePlayer1Moves = gameState()[:PLAYER_1_MOVES]
+      statePlayer1Moves = :PLAYER_1_MOVES
       empty = Fixtures.spaceEmpty
-      player1 = space()[:PLAYER_1]
+      player1 = :PLAYER_1
       game_round = Forge.game_round(
         round_state: statePlayer1Moves,
         board: [player1, player1, empty,
@@ -58,16 +57,16 @@ defmodule Tictactoe.GameRoundTests do
       }
       actual = GameRound.apply_move(game_round, move)
 
-      assert actual.round_state == gameState()[:PLAYER_1_WON]
+      assert actual.round_state == :PLAYER_1_WON
       assert actual.board ==[player1, player1, player1,
                               empty, empty, empty,
                               empty, empty, empty]
     end
 
     test "if player 2 finishes diagonal victory goes to player 2" do
-      statePlayer2Moves = gameState()[:PLAYER_2_MOVES]
+      statePlayer2Moves = :PLAYER_2_MOVES
       empty = Fixtures.spaceEmpty
-      player2 = space()[:PLAYER_2]
+      player2 = :PLAYER_2
       game_round = Forge.game_round(
         round_state: statePlayer2Moves,
         board: [player2, empty, empty,
@@ -79,7 +78,7 @@ defmodule Tictactoe.GameRoundTests do
       }
       actual = GameRound.apply_move(game_round, move)
 
-      assert actual.round_state == gameState()[:PLAYER_2_WON]
+      assert actual.round_state == :PLAYER_2_WON
       assert actual.board ==[player2, empty, empty,
                               empty, player2, empty,
                               empty, empty, player2]
@@ -92,21 +91,21 @@ defmodule Tictactoe.GameRoundTests do
       game_round = Forge.game_round(
                       round_state: playerMovesState(player),
                       board: [player, player, opponent,
-                              opponent, player, opponent,
-                              player, opponent, empty])
+                              opponent, player, empty,
+                              player, opponent, opponent])
       move = %{
-        space: 8,
+        space: 5,
         player: player
       }
      actual = GameRound.apply_move(game_round, move)
 
-     assert actual.round_state == gameState()[:DRAW]
+     assert actual.round_state == :DRAW
     end
   end
 
   def other_player(player) do
-    player1 = space()[:PLAYER_1]
-    player2 = space()[:PLAYER_2]
+    player1 = :PLAYER_1
+    player2 = :PLAYER_2
     cond do
       player == player1 -> player2
       player == player2 -> player1
@@ -115,11 +114,11 @@ defmodule Tictactoe.GameRoundTests do
   end
 
   def playerMovesState(player) do
-    player1 = space()[:PLAYER_1]
-    player2 = space()[:PLAYER_2]
+    player1 = :PLAYER_1
+    player2 = :PLAYER_2
     cond do
-      player == player1 -> gameState()[:PLAYER_2_MOVES]
-      player == player2 -> gameState()[:PLAYER_1_MOVES]
+      player == player1 -> :PLAYER_2_MOVES
+      player == player2 -> :PLAYER_1_MOVES
       true -> :error
     end
   end

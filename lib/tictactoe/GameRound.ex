@@ -2,14 +2,12 @@ defmodule Tictactoe.GameRound do
   @callback start(String, Map) :: Map
   @callback apply_move(Map, Map) :: Map
 
-  import Tictactoe.Enums
-
   def start(game_id, setup) do
-    empty = space()[:EMPTY]
+    empty = :EMPTY
     %{
       game_id: game_id,
       round_setup: setup,
-      round_state: gameState()[:PLAYER_1_MOVES],
+      round_state: :PLAYER_1_MOVES,
       board: [empty, empty, empty,
               empty, empty, empty,
               empty, empty, empty]
@@ -27,23 +25,23 @@ defmodule Tictactoe.GameRound do
   end
 
   def get_round_state(board, player, currentState) do
-    player1Moves = gameState()[:PLAYER_1_MOVES]
-    player2Moves = gameState()[:PLAYER_2_MOVES]
+    player1Moves = :PLAYER_1_MOVES
+    player2Moves = :PLAYER_2_MOVES
 
     is_win = has_player_won(board, player)
-    is_draw = !Enum.member?(board, space()[:EMPTY])
+    is_draw = !Enum.member?(board, :EMPTY)
     cond do
-      is_draw -> gameState()[:DRAW]
-      is_win && currentState == player1Moves -> gameState()[:PLAYER_1_WON]
-      is_win && currentState == player2Moves -> gameState()[:PLAYER_2_WON]
+      is_win && currentState == player1Moves -> :PLAYER_1_WON
+      is_win && currentState == player2Moves -> :PLAYER_2_WON
+      is_draw -> :DRAW
       !is_win -> swap_players_turn(currentState)
       true -> currentState
     end
   end
 
   def swap_players_turn(currentState) do
-    player1 = gameState()[:PLAYER_1_MOVES]
-    player2 = gameState()[:PLAYER_2_MOVES]
+    player1 = :PLAYER_1_MOVES
+    player2 = :PLAYER_2_MOVES
     cond do
       currentState == player1 -> player2
       currentState == player2 -> player1

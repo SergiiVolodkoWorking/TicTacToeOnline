@@ -4,14 +4,14 @@ Faker.start()
 defmodule Fixtures do
 
   def spaceEmpty do
-    Tictactoe.Enums.space[:EMPTY]
+    :EMPTY
   end
 
   def randomPlayerSpace do
     x = :rand.uniform(2)
     cond do
-      x == 1 -> Tictactoe.Enums.space[:PLAYER_1]
-      x == 2 -> Tictactoe.Enums.space[:PLAYER_2]
+      x == 1 -> :PLAYER_1
+      x == 2 -> :PLAYER_2
     end
   end
 
@@ -20,7 +20,7 @@ defmodule Fixtures do
   end
 
   def emptyBoard do
-    empty = Tictactoe.Enums.space[:EMPTY]
+    empty = :EMPTY
     [empty, empty, empty,
     empty, empty, empty,
     empty, empty, empty]
@@ -32,15 +32,17 @@ defmodule Fixtures do
   end
 
   def randomEnum(enum) do
-    elem(hd(Enum.take_random(enum, 1)),1)
+    [item] = Enum.take_random(enum, 1)
+    item
   end
 end
 
 defmodule Forge do
   use Blacksmith
+  alias Tictactoe.Enums, as: Enums
 
   register :player,
-    type: Fixtures.randomEnum(Tictactoe.Enums.playerType),
+    type: Fixtures.randomEnum(Enums.playerType),
     symbol: Fixtures.randomSymbol()
 
   register :round_setup,
@@ -50,9 +52,25 @@ defmodule Forge do
   register :game_round,
     game_id: Faker.UUID.v4,
     round_setup: Forge.round_setup,
-    round_state: Fixtures.randomEnum(Tictactoe.Enums.gameState),
+    round_state: Fixtures.randomEnum(Enums.gameState),
     board: [
-      Fixtures.randomEnum(Tictactoe.Enums.space), Fixtures.randomEnum(Tictactoe.Enums.space), Fixtures.randomEnum(Tictactoe.Enums.space),
-      Fixtures.randomEnum(Tictactoe.Enums.space), Fixtures.randomEnum(Tictactoe.Enums.space), Fixtures.randomEnum(Tictactoe.Enums.space),
-      Fixtures.randomEnum(Tictactoe.Enums.space), Fixtures.randomEnum(Tictactoe.Enums.space), Fixtures.randomEnum(Tictactoe.Enums.space)]
+      Fixtures.randomEnum(Enums.spaces), Fixtures.randomEnum(Enums.spaces), Fixtures.randomEnum(Enums.spaces),
+      Fixtures.randomEnum(Enums.spaces), Fixtures.randomEnum(Enums.spaces), Fixtures.randomEnum(Enums.spaces),
+      Fixtures.randomEnum(Enums.spaces), Fixtures.randomEnum(Enums.spaces), Fixtures.randomEnum(Enums.spaces)]
+end
+
+defmodule Tictactoe.Enums do
+  def spaces do [:EMPTY, :PLAYER_1, :PLAYER_2] end
+
+  def gameState do [
+    :NOT_STARTED,
+    :PLAYER_1_MOVES,
+    :PLAYER_2_MOVES,
+    :PLAYER_1_WON,
+    :PLAYER_2_WON,
+    :DRAW
+  ]
+  end
+
+  def playerType do [:HUMAN, :BOT_EASY] end
 end
