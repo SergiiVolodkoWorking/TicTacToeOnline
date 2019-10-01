@@ -1,0 +1,19 @@
+language: elixir
+
+elixir:
+- 1.9.1
+
+otp_release:
+- 21.3
+
+dist: xenial
+
+script:
+- mix test
+
+# deploy:
+#   provider: heroku
+#   app: TicTacToeOnline
+#   on: master
+#   api_key:
+#     secure:
