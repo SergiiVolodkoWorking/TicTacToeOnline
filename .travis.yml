@@ -9,8 +9,8 @@ otp_release:
 dist: xenial
 
 before_script:
-- npm --prefix assets install
 - sudo apt-get install libgconf-2-4
+- npm --prefix assets install
 - npm --prefix test_e2e install
 
 script:
@@ -22,6 +22,6 @@ script:
 deploy:
   provider: heroku
   app: tictactoe-elixir-online
-  on: ci-cd-implementation
+  on: master
   api_key:
     secure: YbmJhpbMdBqgK7PzZyVPsikRHbnlde6rADoUM7QlEihQMEATOO4sOWtZZRZvhHQnnFC+Oo/L8+xnIjm53y8A+pv8YWrAbVg52cT6M0txQtqBMqz7To8LGFKKyaVH3EeLKCWpyTDPKZdItMgdbnfsMUQg/clGpOf2LuePSjLYAuP6RdSS6Ro8Y7i2l3K0GcO6RefJZOdCKWQH9RGeGEqkg92aE92OR3yWEetWaqPNGxGz4jA5sbLjwyUsqga/YkhResIFJAa6xUcgyjbFKJAE11zOCwU20RJCytO6uPTUH7vKsSgB5yhHNej3s90K3DkKyVX8ucmkghsHsmRqW9Y7AL4m4/wHffI0Muiy0NSlXpc/M01lMyDdfggjAQm2t4Sxbi9MUiibg39P51o4eLAY++xSw4ojjoJFHfJihxF8m2Jem8B/RijiE2zOkxPVVWw2quG+CBzldjcRhedCxdpk9FZO1+dODhodCLJXOuoSjJcmU3va60WYxAxUPCgmQOYpVwAGS3R4N+mp7xvlsK3WHDf24bDuaYj74sz3jphGwITseW66xBM4RbhXKZ6qyxzG5HXUIlOfA30816HXXhA9Zeq9QXbjkzXszn8ngB8YGmvk94L9H5IXfeou8r5Vx5XlVOFw39l2A0i8CAJkmBi5hV2o6agDu2gqWiUAKcWEmqA=
