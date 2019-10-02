@@ -2,8 +2,17 @@ import { addMatchImageSnapshotCommand } from 'cypress-image-snapshot/command';
 addMatchImageSnapshotCommand();
 
 describe('Win easy opponent', function(){
+  before(() => {
+    Cypress.config({
+      viewportWidth: 1000,
+      viewportHeight: 790,
+    })
+  })
+
+
   it('Opens the game', function() {
     cy.visit('/')
+    cy.viewport(1000, 749)
     cy.matchImageSnapshot('Expected Start Menu');
   })
 

@@ -1,14 +1,18 @@
-language: elixir
+os: osx
 
 elixir:
 - 1.9.1
 
-otp_release:
-- 21.3
+# otp_release:
+# - 21.3
 
-dist: xenial
+before_install:
+- brew install erlang
+- brew install elixir
 
 before_script:
+- brew install erlang
+- brew install elixir
 - sudo apt-get install libgconf-2-4
 - npm --prefix assets install
 - npm --prefix test_e2e install
