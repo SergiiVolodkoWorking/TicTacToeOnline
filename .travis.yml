@@ -1,22 +1,25 @@
-os: osx
+language: elixir
 
-before_install:
-- brew install erlang
-- brew install elixir
+elixir:
+- 1.9.1
+
+otp_release:
+- 21.3
+
+dist: xenial
 
 before_script:
-- mix local.hex --force
-- mix local.rebar --force
-- mix deps.get
-- mix compile
+- sudo apt-get install libgconf-2-4
 - npm --prefix assets install
 - npm --prefix test_e2e install
 
 script:
+- sudo bash ./upload_screenshots.sh
 - mix test
 - mix phx.server > /dev/null &
-- sleep 60s
+- npx wait-on http://localhost:4000/
 - npx cypress run --project ./test_e2e
+- sudo bash ./upload_screenshots.sh
 
 deploy:
   provider: heroku

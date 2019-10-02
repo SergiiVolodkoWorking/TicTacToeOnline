@@ -9,7 +9,6 @@ describe('Win easy opponent', function(){
     })
   })
 
-
   it('Opens the game', function() {
     cy.visit('/')
     cy.viewport(1000, 749)
