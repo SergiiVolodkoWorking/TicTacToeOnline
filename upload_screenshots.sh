@@ -3,9 +3,8 @@ echo "Screen shots will be uploaded to Google Drive"
 wget https://github.com/gdrive-org/gdrive/releases/download/2.1.0/gdrive-linux-x64
 chmod +x ./gdrive-linux-x64
 
-ARCHIVE=$(date +%Y-%m-%d_%H_%M_%S)-$TRAVIS_COMMIT.tar
+ARCHIVE=$(date +%Y-%m-%d_%H_%M_%S)-$TRAVIS_PULL_REQUEST_BRANCH.tar
 echo "Creating archive $ARCHIVE"
-ls
 tar cvf $ARCHIVE test_e2e/cypress/snapshots/
 FILESIZE=$(stat -c%s "$ARCHIVE")
 echo "Finished archive (size $FILESIZE), starting Google Drive upload"
