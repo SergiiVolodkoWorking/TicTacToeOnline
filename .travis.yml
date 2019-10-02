@@ -1,26 +1,21 @@
 os: osx
 
-elixir:
-- 1.9.1
-
-# otp_release:
-# - 21.3
-
 before_install:
 - brew install erlang
 - brew install elixir
 
 before_script:
-- brew install erlang
-- brew install elixir
-- sudo apt-get install libgconf-2-4
+- mix local.hex --force
+- mix local.rebar --force
+- mix deps.get
+- mix compile
 - npm --prefix assets install
 - npm --prefix test_e2e install
 
 script:
 - mix test
 - mix phx.server > /dev/null &
-- npx wait-on http://localhost:4000/
+- sleep 60s
 - npx cypress run --project ./test_e2e
 
 deploy:
