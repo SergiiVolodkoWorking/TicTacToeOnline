@@ -8,5 +8,3 @@ config :tictactoe, TictactoeWeb.Endpoint,
 
 # Print only warnings and errors during test
 config :logger, level: :warn
-
-config :tictactoe, :game_setup_builder, Tictactoe.RoundSetupBuilderMock

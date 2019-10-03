@@ -74,3 +74,7 @@ defmodule Tictactoe.Enums do
 
   def playerType do [:HUMAN, :BOT_EASY] end
 end
+
+
+
+Mox.defmock(Tictactoe.RoundSetupBuilderImplMock, for: Tictactoe.RoundSetupBuilder)

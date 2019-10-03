@@ -1,6 +1,6 @@
 defmodule Tictactoe.RoundSetupBuilderTest do
   use ExUnit.Case
-  alias Tictactoe.RoundSetupBuilder, as: Builder
+  alias Tictactoe.RoundSetupBuilderImpl, as: Builder
 
   describe "when init_setup is called" do
     test "it creates initial round setup" do

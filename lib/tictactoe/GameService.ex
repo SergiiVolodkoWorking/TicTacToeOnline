@@ -4,13 +4,14 @@ defmodule Tictactoe.GameService do
   @callback get_game(String, Map) :: Map
   @callback make_move_against_bot(String, integer) :: Map
 
-  alias Tictactoe.RoundSetupBuilder, as: RoundSetupBuilder
   alias Tictactoe.GameRound, as: GameRound
   alias Tictactoe.GameInMemoryRepository, as: GameRepository
   alias Tictactoe.Bot, as: Bot
 
+  @game_setup_builder Application.get_env(:tictactoe, :game_setup_builder)
+
   def start_game(game_id) do
-    setup = mockable(RoundSetupBuilder).init_setup()
+    setup = @game_setup_builder.init_setup()
     game_round = mockable(GameRound).start(game_id, setup)
     saved_id = mockable(GameRepository).save(game_round)
 
