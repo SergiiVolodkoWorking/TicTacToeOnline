@@ -17,7 +17,7 @@ defmodule Tictactoe.GameServiceTests do
   end
 
   describe "Game service" do
-    test "when start is called initializes a game round and returns saved game id" do
+    test "when start is called initializes a game round and returns saved game id and initial board" do
       game_id  = Faker.UUID.v4()
       saved_id = Faker.UUID.v4()
       setup = Forge.round_setup
@@ -33,7 +33,7 @@ defmodule Tictactoe.GameServiceTests do
       assert_called Round, :start, [^game_id , ^setup]
       assert_called Repo, :save, [^round]
 
-      expected = %{game_id: saved_id}
+      expected = %{game_id: saved_id, board: round.board}
 
       assert actual == expected
     end

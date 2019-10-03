@@ -1,5 +1,7 @@
 # Tictactoe
 
+[![Build Status](https://travis-ci.org/SergiiVolodkoWorking/TicTacToeOnline.svg?branch=master)](https://travis-ci.org/SergiiVolodkoWorking/TicTacToeOnline)
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`

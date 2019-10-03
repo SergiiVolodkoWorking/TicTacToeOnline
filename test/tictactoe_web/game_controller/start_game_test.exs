@@ -9,7 +9,12 @@ defmodule TictactoeWeb.GameControllerTest do
 
       actual = json_response(conn, 200)
 
-      assert %{"game_id" => game_id } == actual
+      expected = Jason.decode!(Jason.encode!(%{
+        game_id: game_id,
+        board: Fixtures.emptyBoard
+      }))
+
+      assert actual == expected
     end
 
     test "Game can check current round state", %{conn: conn} do
