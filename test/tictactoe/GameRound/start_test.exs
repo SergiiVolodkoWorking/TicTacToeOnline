@@ -2,22 +2,6 @@ defmodule Tictactoe.GameRoundTests1 do
   use ExUnit.Case
   alias Tictactoe.GameRound, as: GameRound
 
-  describe "when game round start is called" do
-    test "initial game state is returned" do
-      statePlayer1Moves = :PLAYER_1_MOVES
-      game_id = "test-id"
-      setup = Forge.round_setup
-
-      expected = %{
-        game_id: game_id,
-        round_setup: setup,
-        round_state: statePlayer1Moves,
-        board: Fixtures.emptyBoard
-      }
-      assert expected == GameRound.start(game_id, setup)
-    end
-  end
-
   describe "when move is applied" do
     test "empty board updates sucessfully by player 1 and turn goes to player 2" do
       player = Fixtures.randomPlayerSpace()

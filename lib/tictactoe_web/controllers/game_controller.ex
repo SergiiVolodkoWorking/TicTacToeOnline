@@ -18,8 +18,8 @@ defmodule TictactoeWeb.GameController do
   end
 
   def show(conn, %{"id" => game_id}) do
-    result = GameService.get_game(game_id)
-    json(conn, result)
+    round = Repository.load(game_id)
+    json(conn, round)
   end
 
   def update(conn, %{"id" => game_id} = params) do
