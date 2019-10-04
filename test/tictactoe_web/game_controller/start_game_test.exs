@@ -19,8 +19,10 @@ defmodule TictactoeWeb.GameControllerTest do
 
     test "Game can check current round state", %{conn: conn} do
       game_round = Forge.game_round()
-      game_id = Repo.save(game_round)
+      Repo.save(game_round)
       expected = Jason.decode!(Jason.encode!(game_round))
+
+      game_id = game_round.game_id
 
       url = "/api/game/#{game_id}"
       conn = get(conn, url)
@@ -40,9 +42,10 @@ defmodule TictactoeWeb.GameControllerTest do
                 empty, empty, empty,
                 empty, empty, empty])
 
-      game_id = Repo.save(game_round)
+      game_id = game_round.game_id
+      Repo.save(game_round)
       url = "/api/make_move/#{game_id}"
-      body = %{game_id: game_id, taken_space: 2}
+      body = %{game_id: game_round.game_id, taken_space: 2}
 
       conn = put(conn, url, body)
       json_response(conn, 200)
@@ -64,9 +67,10 @@ defmodule TictactoeWeb.GameControllerTest do
                 player2, player1, player1,
                 player1, empty, player2])
 
-      game_id = Repo.save(game_round)
+      game_id = game_round.game_id
+      Repo.save(game_round)
       url = "/api/make_move/#{game_id}"
-      body = %{game_id: game_id, taken_space: 7}
+      body = %{game_id: game_round.game_id, taken_space: 7}
 
       conn = put(conn, url, body)
       json_response(conn, 200)
@@ -88,9 +92,10 @@ defmodule TictactoeWeb.GameControllerTest do
                 player1, empty, empty,
                 empty, empty, empty])
 
-      game_id = Repo.save(game_round)
+      game_id = game_round.game_id
+      Repo.save(game_round)
       url = "/api/make_move/#{game_id}"
-      body = %{game_id: game_id, taken_space: 4}
+      body = %{game_id: game_round.game_id, taken_space: 4}
 
       conn = put(conn, url, body)
       json_response(conn, 200)
@@ -112,9 +117,10 @@ defmodule TictactoeWeb.GameControllerTest do
                 player2, player1, player1,
                 player1, empty, empty])
 
-      game_id = Repo.save(game_round)
+      game_id = game_round.game_id
+      Repo.save(game_round)
       url = "/api/make_move/#{game_id}"
-      body = %{game_id: game_id, taken_space: 7}
+      body = %{game_id: game_round.game_id, taken_space: 7}
 
       conn = put(conn, url, body)
       json_response(conn, 200)
@@ -136,7 +142,8 @@ defmodule TictactoeWeb.GameControllerTest do
                 player1, empty, empty,
                 empty, empty, empty])
 
-      game_id = Repo.save(game_round)
+      game_id = game_round.game_id
+      Repo.save(game_round)
       url = "/api/make_move/#{game_id}"
       body = %{game_id: game_id, taken_space: 4}
 

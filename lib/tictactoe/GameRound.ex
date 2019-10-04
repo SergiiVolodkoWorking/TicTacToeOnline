@@ -1,3 +1,28 @@
+
+
+defmodule GameRound do
+  def start(game_id) do
+    setup = %{
+      first_player: %{type: :HUMAN, symbol: "X"},
+      second_player: %{type: :BOT_EASY, symbol: "O"},
+    }
+    empty = :EMPTY
+
+    %{
+      game_id: game_id,
+      round_setup: setup,
+      round_state: :PLAYER_1_MOVES,
+      board: [empty, empty, empty,
+              empty, empty, empty,
+              empty, empty, empty]
+    }
+  end
+
+end
+
+
+
+
 defmodule Tictactoe.GameRound do
   @callback start(String, Map) :: Map
   @callback apply_move(Map, Map) :: Map

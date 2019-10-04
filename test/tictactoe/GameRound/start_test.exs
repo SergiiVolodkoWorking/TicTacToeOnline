@@ -1,4 +1,4 @@
-defmodule Tictactoe.GameRoundTests do
+defmodule Tictactoe.GameRoundTests1 do
   use ExUnit.Case
   alias Tictactoe.GameRound, as: GameRound
 
