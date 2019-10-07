@@ -1,11 +1,10 @@
 defmodule Board do
   def available_spaces(board) do
-    ListHelper.find_indexes(board, fn s -> s == :EMPTY end)
+    find_indexes(board, fn s -> s == :EMPTY end)
   end
 
   def apply_move(:PlayerWon, board, _, _), do: {:PlayerWon, board}
   def apply_move(:Draw, board, _, _), do: {:Draw, board}
-
   def apply_move(:Playing, board, move_space, player), do: apply_move(board, move_space, player)
   def apply_move(board, move_space, player) do
     board = List.replace_at(board, move_space, player)
@@ -22,24 +21,17 @@ defmodule Board do
   def move_result(:PlayerWon, _, board), do: {:PlayerWon, board}
   def move_result(:Playing, true, board), do: {:Draw, board}
   def move_result(:Playing, false, board), do: {:Playing, board}
-end
 
-
-
-defmodule ListHelper do
-  def find_indexes(collection, function) do
-    do_find_indexes(collection, function, 0, [])
-  end
-
-  def do_find_indexes([], _function, _counter, acc) do
-    Enum.reverse(acc)
-  end
-
-  def do_find_indexes([h|t], function, counter, acc) do
-    if function.(h) do
-      do_find_indexes(t, function, counter + 1, [counter|acc])
-    else
-      do_find_indexes(t, function, counter + 1, acc)
-    end
+  defp find_indexes(collection, condition) do
+    collection
+    |> Enum.with_index()
+    |> Enum.map(fn ({val, idx}) ->
+        if condition.(val) do
+          idx
+        else
+          nil
+        end
+      end)
+    |> Enum.reject(&is_nil/1)
   end
 end
