@@ -4,7 +4,7 @@ addMatchImageSnapshotCommand();
 describe('Lose to hard opponent', function(){
   it('Opens the game', function() {
     cy.visit('/')
-    cy.matchImageSnapshot('Expected Start Menu');
+    cy.matchImageSnapshot('Expected Start Menu vs hard');
   })
 
   it('Starts a game round against a hard bot', function() {
