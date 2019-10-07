@@ -6,9 +6,12 @@ defmodule BotIntellect do
   def take_center(available_spaces), do: Enum.find(available_spaces, fn s -> s == 4 end)
 
   def get_winning_move(nil, available_spaces, player, board) do
-    boardModel = board#clone?
-
-    Enum.find(available_spaces, fn s -> Board.apply_move(boardModel, s, player.code) == :PlayerWon end)
-  end
+    Enum.find(available_spaces,
+          fn s -> case Board.apply_move(board, s, player) do
+              {:PlayerWon, _} -> true
+              {_, _} -> false
+            end
+          end)
+    end
   def get_winning_move(move, _, _, _), do: move
 end

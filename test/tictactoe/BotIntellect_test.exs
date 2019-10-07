@@ -9,7 +9,7 @@ defmodule BotIntellectTests do
       assert BotIntellect.random_move(nil, available_spaces) == 42
     end
 
-    test "if move is made previously returns it" do
+    test "if move was made previously returns that move" do
       available_spaces = Fixtures.randomSpaceIndexesList(9)
       move = Fixtures.randomSpaceIndex
 
@@ -31,4 +31,25 @@ defmodule BotIntellectTests do
     end
   end
 
+  describe "Get winning move" do
+    test "Returns first available move that will bring victory to the player" do
+      empty = :EMPTY
+      player = Fixtures.randomPlayerSpace
+      board = [player, empty, empty,
+              empty, player, player,
+              empty, empty, empty]
+      available_spaces = [0, 1, 2, 3, 6]
+
+      assert BotIntellect.get_winning_move(nil, available_spaces, player, board) == 3
+    end
+
+    test "if move was made previously returns that move" do
+      available_spaces = Fixtures.randomSpaceIndexesList(9)
+      player = Fixtures.randomPlayerSpace
+      board = Fixtures.randomBoard
+      move = Fixtures.randomSpaceIndex
+
+      assert BotIntellect.get_winning_move(move, available_spaces, player, board) == move
+    end
+  end
 end

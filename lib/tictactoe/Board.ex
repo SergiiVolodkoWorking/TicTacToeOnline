@@ -9,7 +9,6 @@ defmodule Board do
   def apply_move(:Playing, board, move_space, player), do: apply_move(board, move_space, player)
   def apply_move(board, move_space, player) do
     board = List.replace_at(board, move_space, player)
-
     has_player_won = Tictactoe.Rules.has_player_won(board, player)
     {round_state, board} = return_round_state(has_player_won, board)
 

@@ -1,7 +1,7 @@
 defmodule Tictactoe.RulesTests do
   use ExUnit.Case
   describe "The draw" do
-    test "is the situation when there no empty spaces on the board" do
+    test "is the situation when there are no empty spaces on the board" do
       board = [:PLAYER_1, :PLAYER_2, :PLAYER_1,
                :PLAYER_2, :PLAYER_1, :PLAYER_2,
                :PLAYER_2, :PLAYER_1, :PLAYER_2]
@@ -9,7 +9,7 @@ defmodule Tictactoe.RulesTests do
       assert Tictactoe.Rules.is_draw(board) == true
     end
 
-    test "if there is at least one not empty space it is not a draw" do
+    test "if there is at least one empty space it is not a draw yet" do
       board = [:PLAYER_1, :PLAYER_2, :EMPTY,
                :PLAYER_2, :PLAYER_1, :PLAYER_2,
                :PLAYER_2, :PLAYER_1, :PLAYER_2]

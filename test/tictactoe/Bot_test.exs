@@ -26,4 +26,53 @@ defmodule BotTests do
       assert Bot.calculate_move(:Playing, board, first_player, second_player, :BOT_EASY) == 1
     end
   end
+
+  describe "Hard bot calculate move" do
+    test "takes center if possible" do
+      player = Fixtures.randomPlayerSpace
+      bot = other_player(player)
+      board = Fixtures.emptyBoard
+
+      assert Bot.calculate_move(:Playing, board, player, bot, :BOT_HARD) == 4
+    end
+
+    test "if center not available takes first winning move" do
+      player = Fixtures.randomPlayerSpace
+      bot = other_player(player)
+      empty = :EMPTY
+      board = [
+        empty, empty, empty,
+        empty, bot, empty,
+        player, bot, empty
+      ]
+      assert Bot.calculate_move(:Playing, board, player, bot, :BOT_HARD) == 1
+    end
+
+    test "if center not available and no winning moves blocks first winning move of opponent" do
+      player = Fixtures.randomPlayerSpace
+      bot = other_player(player)
+      empty = :EMPTY
+      board = [
+        player, empty, empty,
+        player, bot, bot,
+        empty, empty, empty
+      ]
+      assert Bot.calculate_move(:Playing, board, player, bot, :BOT_HARD) == 6
+    end
+
+    test "otherwise returns a random move" do
+      player = Fixtures.randomPlayerSpace
+      bot = other_player(player)
+      empty = :EMPTY
+      board = [
+        player, empty, empty,
+        empty, bot, empty,
+        empty, empty, empty
+      ]
+      assert Bot.calculate_move(:Playing, board, player, bot, :BOT_HARD) == 1
+    end
+  end
+
+  def other_player(:PLAYER_1), do: :PLAYER_2
+  def other_player(:PLAYER_2), do: :PLAYER_1
 end
