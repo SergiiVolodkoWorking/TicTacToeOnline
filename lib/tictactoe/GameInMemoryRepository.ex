@@ -1,8 +1,4 @@
 defmodule Tictactoe.GameInMemoryRepository do
-  @callback save(Map) :: String
-  @callback load(String) :: Map
-  @callback start_link(any) :: any
-
   use Agent
 
   @entityName :GameRound

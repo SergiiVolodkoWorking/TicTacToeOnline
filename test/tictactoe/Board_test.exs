@@ -1,0 +1,95 @@
+defmodule BoardTests do
+  use ExUnit.Case
+
+  describe "available spaces" do
+    test "returns empty list if there are no Empty spaces" do
+      board = [:NotEmpty, :NotEmpty]
+
+      assert Board.available_spaces(board) == []
+    end
+
+    test "returns list of indexes of all empty spaces" do
+      board = [:NotEmpty, :NotEmpty, :EMPTY, :EMPTY, :NotEmpty]
+
+      assert Board.available_spaces(board) == [2, 3]
+    end
+  end
+
+  describe "(private method) return round state" do
+    test "player has won - returns :PlayerWon and resulting board" do
+      board = Fixtures.randomBoard()
+      has_player_won = true
+
+      assert Board.return_round_state(has_player_won, board) == {:PlayerWon, board}
+    end
+
+    test "player didn't win - returns :Playing and resulting board" do
+      board = Fixtures.randomBoard()
+      has_player_won = false
+
+      assert Board.return_round_state(has_player_won, board) == {:Playing, board}
+    end
+
+    test "player didn't win but there is a draw - returns :Playing and resulting board" do
+      board = Fixtures.randomBoard()
+      is_draw = true
+
+      assert Board.return_round_state(:Playing, is_draw, board) == {:Draw, board}
+    end
+
+    test "player didn't win and there is no draw - returns :Playing and resulting board" do
+      board = Fixtures.randomBoard()
+      is_draw = false
+
+      assert Board.return_round_state(:Playing, is_draw, board) == {:Playing, board}
+    end
+  end
+
+  describe "apply move" do
+    test "empty board gets updated and round continues" do
+      board = Fixtures.emptyBoard
+      move = Fixtures.randomSpaceIndex
+      player = Fixtures.randomPlayerSpace
+
+      expectedBoard = List.replace_at(board, move, player)
+
+      assert Board.apply_move(board, move, player) == {:Playing, expectedBoard}
+    end
+
+    test "applying a winning move returns :PlayerWon and resulting board" do
+      empty = :EMPTY
+      player = Fixtures.randomPlayerSpace
+      board = [player, player, empty,
+                empty, empty, empty,
+                empty, empty, empty]
+      move = 2
+      expectedBoard = List.replace_at(board, move, player)
+
+      assert Board.apply_move(board, move, player) == {:PlayerWon, expectedBoard}
+    end
+
+    test "applying a draw move returns :Draw and resulting board" do
+      empty = :EMPTY
+      x = Fixtures.randomPlayerSpace()
+      o = other_player(x)
+      board = [x, x, o,
+              o, x, empty,
+              x, o, o]
+      move = 5
+      expectedBoard = List.replace_at(board, move, x)
+
+      assert Board.apply_move(board, move, x) == {:Draw, expectedBoard}
+    end
+
+  end
+
+  def other_player(player) do
+    player1 = :PLAYER_1
+    player2 = :PLAYER_2
+    cond do
+      player == player1 -> player2
+      player == player2 -> player1
+      true -> player
+    end
+  end
+end

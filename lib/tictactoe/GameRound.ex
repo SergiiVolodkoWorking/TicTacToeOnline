@@ -1,6 +1,7 @@
 
-
 defmodule GameRound do
+  defstruct [:game_id, :round_setup, :round_state, :board]
+
   def start(game_id) do
     setup = %{
       first_player: %{type: :HUMAN, symbol: "X"},

@@ -2,6 +2,7 @@ ExUnit.start()
 Faker.start()
 
 defmodule Fixtures do
+  alias Tictactoe.Enums, as: Enums
 
   def spaceEmpty do
     :EMPTY
@@ -35,6 +36,21 @@ defmodule Fixtures do
     [item] = Enum.take_random(enum, 1)
     item
   end
+
+  def randomBoard do
+    [
+      randomEnum(Enums.spaces), randomEnum(Enums.spaces), randomEnum(Enums.spaces),
+      randomEnum(Enums.spaces), randomEnum(Enums.spaces), randomEnum(Enums.spaces),
+      randomEnum(Enums.spaces), randomEnum(Enums.spaces), randomEnum(Enums.spaces)
+    ]
+  end
+
+  def randomSpaceIndexesList(length, list \\ [])
+  def randomSpaceIndexesList(0, list), do: list
+  def randomSpaceIndexesList(length, list) do
+    length - 1
+    |> randomSpaceIndexesList([randomSpaceIndex() | list])
+  end
 end
 
 defmodule Forge do
@@ -53,10 +69,7 @@ defmodule Forge do
     game_id: Faker.UUID.v4,
     round_setup: Forge.round_setup,
     round_state: Fixtures.randomEnum(Enums.gameState),
-    board: [
-      Fixtures.randomEnum(Enums.spaces), Fixtures.randomEnum(Enums.spaces), Fixtures.randomEnum(Enums.spaces),
-      Fixtures.randomEnum(Enums.spaces), Fixtures.randomEnum(Enums.spaces), Fixtures.randomEnum(Enums.spaces),
-      Fixtures.randomEnum(Enums.spaces), Fixtures.randomEnum(Enums.spaces), Fixtures.randomEnum(Enums.spaces)]
+    board: Fixtures.randomBoard()
 end
 
 defmodule Tictactoe.Enums do
