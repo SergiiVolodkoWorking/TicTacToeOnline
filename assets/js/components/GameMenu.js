@@ -41,7 +41,7 @@ const GameMenu = ({ roundState, startGame }) => {
                 <div className="card-body text-secondary">
                     <br />
                     <button id='start-easy-btn' className={btnStyle}
-                        onClick={() => { if (!isGameEnded) startGame() }}>
+                        onClick={() => { if (!isGameEnded) startGame("bot_easy") }}>
                         <i className="fas fa-play-circle"></i> Start VS Easy bot
                     </button>
                     <br /><br />

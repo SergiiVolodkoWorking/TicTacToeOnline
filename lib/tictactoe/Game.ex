@@ -1,6 +1,6 @@
 defmodule Game do
-  def create(game_id) do
-    GameRound.start(game_id)
+  def create(game_id, opponent_type) do
+    GameRound.start(game_id, opponent_type)
   end
 
   def make_move_against_bot(round, taken_space) do
@@ -11,12 +11,17 @@ defmodule Game do
     {round_state, board} = Board.apply_move(board, taken_space, first_player.code)
     winner = round_state == :PlayerWon && :PLAYER_1 || nil
 
-    bot_move = Bot.calculate_move(round_state, board, first_player, second_player, second_player.type)
+    bot_move = Bot.calculate_move(
+      round_state,
+      board,
+      first_player.code,
+      second_player.code,
+      second_player.type)
+
     {round_state, board} = Board.apply_move(round_state, board, bot_move, second_player.code)
     winner = (round_state == :PlayerWon && winner == nil) && :PLAYER_2 || winner
 
     round_state = map_round_state(round_state, winner)
-
     GameRound.update(round, round_state, board)
   end
 

@@ -1,10 +1,12 @@
 defmodule GameRound do
-  defstruct [:game_id, :round_setup, :round_state, :board]
 
-  def start(game_id) do
+  def start(game_id, "bot_hard"), do: start(game_id, :BOT_HARD)
+  def start(game_id, "bot_easy"), do: start(game_id, :BOT_EASY)
+  def start(game_id, nil), do: start(game_id, :BOT_EASY)
+  def start(game_id, second_player_type) do
     setup = %{
       first_player: %{type: :HUMAN, symbol: "X", code: :PLAYER_1},
-      second_player: %{type: :BOT_EASY, symbol: "O", code: :PLAYER_2},
+      second_player: %{type: second_player_type, symbol: "O", code: :PLAYER_2},
     }
     empty = :EMPTY
 

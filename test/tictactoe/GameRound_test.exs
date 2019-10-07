@@ -15,8 +15,25 @@ defmodule GameRoundTests do
         }
       }
 
-      assert GameRound.start(game_id) == round
+      assert GameRound.start(game_id, nil) == round
     end
+
+    test "initial game round is returned with specified opponent type" do
+      game_id = "test-create-vs-hard"
+
+      round = %{
+        game_id: game_id,
+        round_state: :PLAYER_1_MOVES,
+        board: Fixtures.emptyBoard,
+        round_setup: %{
+          first_player: %{type: :HUMAN, symbol: "X", code: :PLAYER_1},
+          second_player: %{type: :BOT_HARD, symbol: "O", code: :PLAYER_2},
+        }
+      }
+
+      assert GameRound.start(game_id, "bot_hard") == round
+    end
+
   end
 
   describe "when update round is called" do

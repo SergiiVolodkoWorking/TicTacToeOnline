@@ -41,6 +41,7 @@ defmodule BotIntellectTests do
       available_spaces = [0, 1, 2, 3, 6]
 
       assert BotIntellect.get_winning_move(nil, available_spaces, player, board) == 3
+      assert BotIntellect.get_winning_move(available_spaces, player, board) == 3
     end
 
     test "if move was made previously returns that move" do

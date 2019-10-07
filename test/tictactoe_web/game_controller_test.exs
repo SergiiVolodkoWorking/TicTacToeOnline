@@ -5,7 +5,7 @@ defmodule TictactoeWeb.GameControllerTest do
   describe "Game round" do
     test "Player can start the round", %{conn: conn} do
       game_id = "id-to-create-game"
-      conn = post(conn, "/api/start_game", %{game_id: game_id})
+      conn = post(conn, "/api/start_game", %{game_id: game_id, opponent_type: "bot_easy"})
 
       actual = json_response(conn, 200)
 

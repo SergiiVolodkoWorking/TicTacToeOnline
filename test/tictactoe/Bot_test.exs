@@ -41,11 +41,11 @@ defmodule BotTests do
       bot = other_player(player)
       empty = :EMPTY
       board = [
-        empty, empty, empty,
-        empty, bot, empty,
-        player, bot, empty
+        bot, player, empty,
+        player, bot, player,
+        empty, empty, empty
       ]
-      assert Bot.calculate_move(:Playing, board, player, bot, :BOT_HARD) == 1
+      assert Bot.calculate_move(:Playing, board, player, bot, :BOT_HARD) == 8
     end
 
     test "if center not available and no winning moves blocks first winning move of opponent" do

@@ -4,10 +4,9 @@ defmodule TictactoeWeb.GameController do
   action_fallback TictactoeWeb.FallbackController
   alias Tictactoe.GameInMemoryRepository, as: Repository
 
-  def create(conn, %{"game_id" => game_id}) do
+  def create(conn, %{"game_id" => game_id, "opponent_type" => opponent_type}) do
     round =
-      "#{game_id}"
-      |> Game.create
+      Game.create("#{game_id}", opponent_type)
       |> Repository.save
 
     json(conn, %{
