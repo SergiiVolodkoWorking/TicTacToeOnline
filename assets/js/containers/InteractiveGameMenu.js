@@ -9,8 +9,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  startGame: () => {
-    const body = { game_id: new Date().getTime() }
+  startGame: (opponent_type) => {
+    const body = { game_id: new Date().getTime(), opponent_type: opponent_type }
     makePostRequest(
       'api/start_game',
       body,

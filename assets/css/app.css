@@ -29,6 +29,10 @@
   color: grey;
 }
 
+.btn-lg{
+  margin-bottom: 20px;
+}
+
 .grid-container {
   display: grid;
   grid-gap: 15px;

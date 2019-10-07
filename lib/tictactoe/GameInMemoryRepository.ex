@@ -1,8 +1,4 @@
 defmodule Tictactoe.GameInMemoryRepository do
-  @callback save(Map) :: String
-  @callback load(String) :: Map
-  @callback start_link(any) :: any
-
   use Agent
 
   @entityName :GameRound
@@ -14,7 +10,7 @@ defmodule Tictactoe.GameInMemoryRepository do
   def save(round) do
     id = round.game_id
     Agent.update(@entityName, fn state -> Map.put(state, id, round) end)
-    id
+    round
   end
 
   def load(game_id) do

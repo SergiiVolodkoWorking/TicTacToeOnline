@@ -2,6 +2,7 @@ ExUnit.start()
 Faker.start()
 
 defmodule Fixtures do
+  alias Tictactoe.Enums, as: Enums
 
   def spaceEmpty do
     :EMPTY
@@ -35,6 +36,25 @@ defmodule Fixtures do
     [item] = Enum.take_random(enum, 1)
     item
   end
+
+  def randomGameState do
+    Fixtures.randomEnum(Enums.gameState)
+  end
+
+  def randomBoard do
+    [
+      randomEnum(Enums.spaces), randomEnum(Enums.spaces), randomEnum(Enums.spaces),
+      randomEnum(Enums.spaces), randomEnum(Enums.spaces), randomEnum(Enums.spaces),
+      randomEnum(Enums.spaces), randomEnum(Enums.spaces), randomEnum(Enums.spaces)
+    ]
+  end
+
+  def randomSpaceIndexesList(length, list \\ [])
+  def randomSpaceIndexesList(0, list), do: list
+  def randomSpaceIndexesList(length, list) do
+    length - 1
+    |> randomSpaceIndexesList([randomSpaceIndex() | list])
+  end
 end
 
 defmodule Forge do
@@ -43,20 +63,28 @@ defmodule Forge do
 
   register :player,
     type: Fixtures.randomEnum(Enums.playerType),
-    symbol: Fixtures.randomSymbol()
+    symbol: Fixtures.randomSymbol(),
+    code: Fixtures.randomPlayerSpace()
 
   register :round_setup,
-    first_player: Forge.player,
-    second_player: Forge.player
+    first_player: Forge.player(code: :PLAYER_1),
+    second_player: Forge.player(code: :PLAYER_2)
+
+  register :round_setup_easy_bot,
+    first_player: Forge.player(type: :HUMAN, code: :PLAYER_1),
+    second_player: Forge.player(type: :BOT_EASY, code: :PLAYER_2)
 
   register :game_round,
     game_id: Faker.UUID.v4,
     round_setup: Forge.round_setup,
     round_state: Fixtures.randomEnum(Enums.gameState),
-    board: [
-      Fixtures.randomEnum(Enums.spaces), Fixtures.randomEnum(Enums.spaces), Fixtures.randomEnum(Enums.spaces),
-      Fixtures.randomEnum(Enums.spaces), Fixtures.randomEnum(Enums.spaces), Fixtures.randomEnum(Enums.spaces),
-      Fixtures.randomEnum(Enums.spaces), Fixtures.randomEnum(Enums.spaces), Fixtures.randomEnum(Enums.spaces)]
+    board: Fixtures.randomBoard()
+
+  register :game_round_vs_easy_bot,
+    game_id: Faker.UUID.v4,
+    round_setup: Forge.round_setup_easy_bot,
+    round_state: :PLAYER_1_MOVES,
+    board: Fixtures.randomBoard()
 end
 
 defmodule Tictactoe.Enums do
