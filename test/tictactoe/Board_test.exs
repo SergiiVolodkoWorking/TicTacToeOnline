@@ -54,6 +54,7 @@ defmodule BoardTests do
       expectedBoard = List.replace_at(board, move, player)
 
       assert Board.apply_move(board, move, player) == {:Playing, expectedBoard}
+      assert Board.apply_move(:Playing, board, move, player) == {:Playing, expectedBoard}
     end
 
     test "applying a winning move returns :PlayerWon and resulting board" do
@@ -66,6 +67,7 @@ defmodule BoardTests do
       expectedBoard = List.replace_at(board, move, player)
 
       assert Board.apply_move(board, move, player) == {:PlayerWon, expectedBoard}
+      assert Board.apply_move(:Playing, board, move, player) == {:PlayerWon, expectedBoard}
     end
 
     test "applying a draw move returns :Draw and resulting board" do
@@ -79,8 +81,24 @@ defmodule BoardTests do
       expectedBoard = List.replace_at(board, move, x)
 
       assert Board.apply_move(board, move, x) == {:Draw, expectedBoard}
+      assert Board.apply_move(:Playing, board, move, x) == {:Draw, expectedBoard}
     end
 
+    test "if there is already a draw - do nothing" do
+      board = Fixtures.randomBoard()
+      player = Fixtures.randomPlayerSpace
+      move = Fixtures.randomSpaceIndex
+
+      assert Board.apply_move(:Draw, board, move, player) == {:Draw, board}
+    end
+
+    test "if there is already a victory - do nothing" do
+      board = Fixtures.randomBoard()
+      player = Fixtures.randomPlayerSpace
+      move = Fixtures.randomSpaceIndex
+
+      assert Board.apply_move(:PlayerWon, board, move, player) == {:PlayerWon, board}
+    end
   end
 
   def other_player(player) do

@@ -35,9 +35,8 @@ defmodule TictactoeWeb.GameControllerTest do
     test "their winning move ends the game", %{conn: conn} do
       empty = Fixtures.spaceEmpty
       player1 = :PLAYER_1
-      game_round = Forge.game_round(
+      game_round = Forge.game_round_vs_easy_bot(
         game_id: "test-make-move",
-        round_state: :PLAYER_1_MOVES,
         board: [player1, player1, empty,
                 empty, empty, empty,
                 empty, empty, empty])
@@ -61,8 +60,7 @@ defmodule TictactoeWeb.GameControllerTest do
       empty = Fixtures.spaceEmpty
       player1 = :PLAYER_1
       player2 = :PLAYER_2
-      game_round = Forge.game_round(
-        round_state: :PLAYER_1_MOVES,
+      game_round = Forge.game_round_vs_easy_bot(
         board: [player1, player2, player2,
                 player2, player1, player1,
                 player1, empty, player2])
@@ -86,8 +84,7 @@ defmodule TictactoeWeb.GameControllerTest do
       empty = Fixtures.spaceEmpty
       player1 = :PLAYER_1
       player2 = :PLAYER_2
-      game_round = Forge.game_round(
-        round_state: :PLAYER_1_MOVES,
+      game_round = Forge.game_round_vs_easy_bot(
         board: [player2, player2, empty,
                 player1, empty, empty,
                 empty, empty, empty])
@@ -111,8 +108,7 @@ defmodule TictactoeWeb.GameControllerTest do
       empty = Fixtures.spaceEmpty
       player1 = :PLAYER_1
       player2 = :PLAYER_2
-      game_round = Forge.game_round(
-        round_state: :PLAYER_1_MOVES,
+      game_round = Forge.game_round_vs_easy_bot(
         board: [player1, player2, player2,
                 player2, player1, player1,
                 player1, empty, empty])
@@ -136,8 +132,7 @@ defmodule TictactoeWeb.GameControllerTest do
       empty = Fixtures.spaceEmpty
       player1 = :PLAYER_1
       player2 = :PLAYER_2
-      game_round = Forge.game_round(
-        round_state: :PLAYER_1_MOVES,
+      game_round = Forge.game_round_vs_easy_bot(
         board: [player2, empty, empty,
                 player1, empty, empty,
                 empty, empty, empty])

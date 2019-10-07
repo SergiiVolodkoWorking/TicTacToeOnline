@@ -7,7 +7,7 @@ defmodule BotTests do
       first_player = Forge.player
       second_player = Forge.player
 
-      assert Bot.calculate_move(:PlayerWon, board, first_player, second_player) == nil
+      assert Bot.calculate_move(:PlayerWon, board, first_player, second_player, :ANY_TYPE) == nil
     end
 
     test "there is already a draw - do nothing" do
@@ -15,7 +15,7 @@ defmodule BotTests do
       first_player = Forge.player
       second_player = Forge.player
 
-      assert Bot.calculate_move(:Draw, board, first_player, second_player) == nil
+      assert Bot.calculate_move(:Draw, board, first_player, second_player, :ANY_TYPE) == nil
     end
 
     test "Easy bot makes a random move" do

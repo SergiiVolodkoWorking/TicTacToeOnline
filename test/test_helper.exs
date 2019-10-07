@@ -37,6 +37,10 @@ defmodule Fixtures do
     item
   end
 
+  def randomGameState do
+    Fixtures.randomEnum(Enums.gameState)
+  end
+
   def randomBoard do
     [
       randomEnum(Enums.spaces), randomEnum(Enums.spaces), randomEnum(Enums.spaces),
@@ -59,16 +63,27 @@ defmodule Forge do
 
   register :player,
     type: Fixtures.randomEnum(Enums.playerType),
-    symbol: Fixtures.randomSymbol()
+    symbol: Fixtures.randomSymbol(),
+    code: Fixtures.randomPlayerSpace()
 
   register :round_setup,
-    first_player: Forge.player,
-    second_player: Forge.player
+    first_player: Forge.player(code: :PLAYER_1),
+    second_player: Forge.player(code: :PLAYER_2)
+
+  register :round_setup_easy_bot,
+    first_player: Forge.player(type: :HUMAN, code: :PLAYER_1),
+    second_player: Forge.player(type: :BOT_EASY, code: :PLAYER_2)
 
   register :game_round,
     game_id: Faker.UUID.v4,
     round_setup: Forge.round_setup,
     round_state: Fixtures.randomEnum(Enums.gameState),
+    board: Fixtures.randomBoard()
+
+  register :game_round_vs_easy_bot,
+    game_id: Faker.UUID.v4,
+    round_setup: Forge.round_setup_easy_bot,
+    round_state: :PLAYER_1_MOVES,
     board: Fixtures.randomBoard()
 end
 
