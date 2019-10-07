@@ -30,7 +30,8 @@ const GameMenu = ({ roundState, startGame }) => {
         default: cardStyle += 'menu-not-started';
     }
 
-    const btnStyle = isGameEnded ? "btn-lg btn-light btn disabled" : "btn-lg btn-success"
+    const btnStartEasyStyle = isGameEnded ? "btn-lg btn-light btn disabled" : "btn-lg btn-success"
+    const btnStartHardStyle = isGameEnded ? "btn-lg btn-light btn disabled" : "btn-lg btn-danger"
 
     return (
         <div className='card-img-overlay bg-gradient-light menu-as-popup mt-5'>
@@ -39,12 +40,15 @@ const GameMenu = ({ roundState, startGame }) => {
                     <h4>{menuTitle}</h4>
                 </div>
                 <div className="card-body text-secondary">
-                    <br />
-                    <button id='start-easy-btn' className={btnStyle}
+                    <button id='start-easy-btn' className={btnStartEasyStyle}
                         onClick={() => { if (!isGameEnded) startGame("bot_easy") }}>
                         <i className="fas fa-play-circle"></i> Start VS Easy bot
                     </button>
-                    <br /><br />
+                    <br />
+                    <button id='start-hard-btn' className={btnStartHardStyle}
+                        onClick={() => { if (!isGameEnded) startGame("bot_hard") }}>
+                        <i className="fas fa-play-circle"></i> Start VS Hard bot
+                    </button>
                 </div>
             </div>
         </div>
