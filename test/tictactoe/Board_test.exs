@@ -15,33 +15,33 @@ defmodule BoardTests do
     end
   end
 
-  describe "(private method) return round state" do
+  describe "move result" do
     test "player has won - returns :PlayerWon and resulting board" do
       board = Fixtures.randomBoard()
       has_player_won = true
 
-      assert Board.return_round_state(has_player_won, board) == {:PlayerWon, board}
+      assert Board.move_result(has_player_won, board) == {:PlayerWon, board}
     end
 
     test "player didn't win - returns :Playing and resulting board" do
       board = Fixtures.randomBoard()
       has_player_won = false
 
-      assert Board.return_round_state(has_player_won, board) == {:Playing, board}
+      assert Board.move_result(has_player_won, board) == {:Playing, board}
     end
 
     test "player didn't win but there is a draw - returns :Playing and resulting board" do
       board = Fixtures.randomBoard()
       is_draw = true
 
-      assert Board.return_round_state(:Playing, is_draw, board) == {:Draw, board}
+      assert Board.move_result(:Playing, is_draw, board) == {:Draw, board}
     end
 
     test "player didn't win and there is no draw - returns :Playing and resulting board" do
       board = Fixtures.randomBoard()
       is_draw = false
 
-      assert Board.return_round_state(:Playing, is_draw, board) == {:Playing, board}
+      assert Board.move_result(:Playing, is_draw, board) == {:Playing, board}
     end
   end
 

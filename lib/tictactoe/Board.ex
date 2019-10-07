@@ -11,17 +11,17 @@ defmodule Board do
     board = List.replace_at(board, move_space, player)
 
     has_player_won = Tictactoe.Rules.has_player_won(board, player)
-    {round_state, board} = return_round_state(has_player_won, board)
+    {round_state, board} = move_result(has_player_won, board)
 
     is_draw = Tictactoe.Rules.is_draw(board)
-    return_round_state(round_state, is_draw, board)
+    move_result(round_state, is_draw, board)
   end
 
-  def return_round_state(true, board), do: {:PlayerWon, board}
-  def return_round_state(false, board), do: {:Playing, board}
-  def return_round_state(:PlayerWon, _, board), do: {:PlayerWon, board}
-  def return_round_state(:Playing, true, board), do: {:Draw, board}
-  def return_round_state(:Playing, false, board), do: {:Playing, board}
+  def move_result(true, board), do: {:PlayerWon, board}
+  def move_result(false, board), do: {:Playing, board}
+  def move_result(:PlayerWon, _, board), do: {:PlayerWon, board}
+  def move_result(:Playing, true, board), do: {:Draw, board}
+  def move_result(:Playing, false, board), do: {:Playing, board}
 end
 
 
