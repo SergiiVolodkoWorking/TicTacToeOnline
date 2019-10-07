@@ -2,7 +2,7 @@ defmodule BotTests do
   use ExUnit.Case
 
   describe "calculate move" do
-    test "player already won - do nothing" do
+    test "does nothing if player already won" do
       board = Fixtures.randomBoard
       first_player = Forge.player
       second_player = Forge.player
@@ -10,7 +10,7 @@ defmodule BotTests do
       assert Bot.calculate_move(:PlayerWon, board, first_player, second_player, :ANY_TYPE) == nil
     end
 
-    test "there is already a draw - do nothing" do
+    test "does nothing if there is already a draw" do
       board = Fixtures.randomBoard
       first_player = Forge.player
       second_player = Forge.player
@@ -48,7 +48,7 @@ defmodule BotTests do
       assert Bot.calculate_move(:Playing, board, player, bot, :BOT_HARD) == 8
     end
 
-    test "if center not available and no winning moves blocks first winning move of opponent" do
+    test "if center not available and no winning moves then blocks first winning move of the opponent" do
       player = Fixtures.randomPlayerSpace
       bot = other_player(player)
       empty = :EMPTY

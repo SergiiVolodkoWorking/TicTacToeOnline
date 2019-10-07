@@ -15,29 +15,29 @@ defmodule BoardTests do
     end
   end
 
-  describe "move result" do
-    test "player has won - returns :PlayerWon and resulting board" do
+  describe "move result gives" do
+    test "victory result if player has won" do
       board = Fixtures.randomBoard()
       has_player_won = true
 
       assert Board.move_result(has_player_won, board) == {:PlayerWon, board}
     end
 
-    test "player didn't win - returns :Playing and resulting board" do
+    test "game continuation result if player didn't win" do
       board = Fixtures.randomBoard()
       has_player_won = false
 
       assert Board.move_result(has_player_won, board) == {:Playing, board}
     end
 
-    test "player didn't win but there is a draw - returns :Playing and resulting board" do
+    test "draw result if player didn't win but there is a draw" do
       board = Fixtures.randomBoard()
       is_draw = true
 
       assert Board.move_result(:Playing, is_draw, board) == {:Draw, board}
     end
 
-    test "player didn't win and there is no draw - returns :Playing and resulting board" do
+    test "game continuation result when player didn't win and there is no draw" do
       board = Fixtures.randomBoard()
       is_draw = false
 
@@ -57,7 +57,7 @@ defmodule BoardTests do
       assert Board.apply_move(:Playing, board, move, player) == {:Playing, expectedBoard}
     end
 
-    test "applying a winning move returns :PlayerWon and resulting board" do
+    test "applying a winning move gives a victory result" do
       empty = :EMPTY
       player = Fixtures.randomPlayerSpace
       board = [player, player, empty,
@@ -70,7 +70,7 @@ defmodule BoardTests do
       assert Board.apply_move(:Playing, board, move, player) == {:PlayerWon, expectedBoard}
     end
 
-    test "applying a draw move returns :Draw and resulting board" do
+    test "applying a draw move gives a draw result" do
       empty = :EMPTY
       x = Fixtures.randomPlayerSpace()
       o = other_player(x)
@@ -84,7 +84,7 @@ defmodule BoardTests do
       assert Board.apply_move(:Playing, board, move, x) == {:Draw, expectedBoard}
     end
 
-    test "if there is already a draw - do nothing" do
+    test "does nothing if there is already a draw present" do
       board = Fixtures.randomBoard()
       player = Fixtures.randomPlayerSpace
       move = Fixtures.randomSpaceIndex
@@ -92,7 +92,7 @@ defmodule BoardTests do
       assert Board.apply_move(:Draw, board, move, player) == {:Draw, board}
     end
 
-    test "if there is already a victory - do nothing" do
+    test "does nothing if there is already a victory present" do
       board = Fixtures.randomBoard()
       player = Fixtures.randomPlayerSpace
       move = Fixtures.randomSpaceIndex
