@@ -40,8 +40,7 @@ S
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"},
       {:faker, "~> 0.12", only: :test},
-      {:blacksmith, "~> 0.1", only: :test},
-      {:mockery, "~> 2.3.0", runtime: false}
+      {:blacksmith, "~> 0.1", only: :test}
     ]
   end
 end

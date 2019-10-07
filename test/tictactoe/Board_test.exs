@@ -101,13 +101,6 @@ defmodule BoardTests do
     end
   end
 
-  def other_player(player) do
-    player1 = :PLAYER_1
-    player2 = :PLAYER_2
-    cond do
-      player == player1 -> player2
-      player == player2 -> player1
-      true -> player
-    end
-  end
+  def other_player(:PLAYER_1), do: :PLAYER_2
+  def other_player(:PLAYER_2), do: :PLAYER_1
 end
