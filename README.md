@@ -5,7 +5,6 @@
 ### Latest playable version: https://tictactoe-elixir-online.herokuapp.com
 ![image](https://user-images.githubusercontent.com/54677730/66420899-bdfdc280-e9fe-11e9-87c5-c31a295d0224.png)
 
-
 This project implements TicTacToe as a client-server application so the game is playable via browser.
 Backend made on Elixir and it's web framework Phoenix. Fronted is implemented as a Flux RaectJS site utilizing React-Redux package to manage UI state.
 
@@ -50,7 +49,7 @@ The solution is a client-server application with
 
 Last 3 characteristics are the result of preparing the system for PvP play feature, which, unfortunately, is not in the game yet.
 
-More details on [the architecture wiki page.](https://github.com/SergiiVolodkoWorking/TicTacToeOnline/wiki/Overview-and-Architecture)
+More details on [the Architecture wiki page.](https://github.com/SergiiVolodkoWorking/TicTacToeOnline/wiki/Overview-and-Architecture)
 
 ![image](https://user-images.githubusercontent.com/54677730/66419720-7aa25480-e9fc-11e9-8736-f2efa8b4219e.png)
 
