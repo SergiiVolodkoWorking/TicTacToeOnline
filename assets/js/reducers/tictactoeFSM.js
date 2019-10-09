@@ -14,9 +14,12 @@ const tictactoeFSM = function (state = initialState, action) {
     const gameRoundFromServer = action.gameRound;
 
     switch (true) {
-
         case event === GameEvents.START_ROUND &&
-            currentState === GameRoundState.NOT_STARTED:
+            [GameRoundState.NOT_STARTED,
+             GameRoundState.PLAYER_1_WON,
+             GameRoundState.PLAYER_2_WON,
+             GameRoundState.DRAW]
+                .includes(currentState):
             return {
                 roundState: GameRoundState.WAITING_UPDATE,
                 gameId: gameRoundFromServer.game_id,
@@ -39,13 +42,15 @@ const tictactoeFSM = function (state = initialState, action) {
                 board: currentGameRound.board
             }
 
+        case event === GameEvents.START_ROUND &&
+            currentState === GameRoundState.PLAYER_1_WON:
+            return {
+                roundState: GameRoundState.WAITING_UPDATE,
+                gameId: gameRoundFromServer.game_id,
+                board: gameRoundFromServer.board
+            }
+
         default: return currentGameRound;
-
-        // Will be available once issue with multiple timers is resolved
-        // { event: GameEvents.START_ROUND, from: GameRoundState.PLAYER_1_WON, to: GameRoundState.WAITING_UPDATE },
-        // { event: GameEvents.START_ROUND, from: GameRoundState.PLAYER_2_WON, to: GameRoundState.WAITING_UPDATE },
-        // { event: GameEvents.START_ROUND, from: GameRoundState.DRAW, to: GameRoundState.WAITING_UPDATE },
-
     }
 }
 

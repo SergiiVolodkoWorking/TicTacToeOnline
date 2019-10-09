@@ -9,11 +9,7 @@ describe('Lose to hard opponent', function(){
 
   it('Starts a game round against a hard bot', function() {
     cy.get('#start-hard-btn').click()
-    cy.matchImageSnapshot('Expected Loading Spinner vs hard');
-  })
-
-  it('Waits few milliseconds until the round is lunched', function() {
-    cy.wait(100)
+    cy.wait(600)
     cy.matchImageSnapshot('Expected Empty Board vs hard');
   })
 
@@ -24,7 +20,6 @@ describe('Lose to hard opponent', function(){
   })
 
   it('Makes remaining moves vs hard ', function() {
-    cy.wait(600)
     cy.get('#space-3').click()
     cy.wait(600)
 

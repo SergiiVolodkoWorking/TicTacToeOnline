@@ -12,7 +12,7 @@ const GameMenu = ({ roundState, startGame }) => {
     if (!isMenuVisible) {
         return (null)
     }
-    let menuTitle = 'Menu'
+    let menuTitle = 'Start game'
     let cardStyle = 'card large '
     switch (roundState) {
         case GameRoundState.PLAYER_1_WON: {
@@ -29,10 +29,6 @@ const GameMenu = ({ roundState, startGame }) => {
         } break;
         default: cardStyle += 'menu-not-started';
     }
-
-    const btnStartEasyStyle = isGameEnded ? "btn-lg btn-light btn disabled" : "btn-lg btn-success"
-    const btnStartHardStyle = isGameEnded ? "btn-lg btn-light btn disabled" : "btn-lg btn-danger"
-
     return (
         <div className='card-img-overlay bg-gradient-light menu-as-popup mt-5'>
             <div className={cardStyle}>
@@ -40,14 +36,14 @@ const GameMenu = ({ roundState, startGame }) => {
                     <h4>{menuTitle}</h4>
                 </div>
                 <div className="card-body text-secondary">
-                    <button id='start-easy-btn' className={btnStartEasyStyle}
-                        onClick={() => { if (!isGameEnded) startGame("bot_easy") }}>
-                        <i className="fas fa-play-circle"></i> Start VS Easy bot
+                    <button id='start-easy-btn' className="btn-lg btn-success"
+                        onClick={() => {startGame("bot_easy")}}>
+                        <i className="fas fa-play-circle"></i> VS Easy computer
                     </button>
                     <br />
-                    <button id='start-hard-btn' className={btnStartHardStyle}
-                        onClick={() => { if (!isGameEnded) startGame("bot_hard") }}>
-                        <i className="fas fa-play-circle"></i> Start VS Hard bot
+                    <button id='start-hard-btn' className="btn-lg btn-danger"
+                        onClick={() => {startGame("bot_hard")}}>
+                        <i className="fas fa-play-circle"></i> VS Hard computer
                     </button>
                 </div>
             </div>
